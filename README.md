@@ -1,10 +1,9 @@
 # d3-tile
 Image-based map tiles for use with D3.
 
-Derived from [d3-plugins/geo/tile/](https://github.com/d3/d3-plugins/tree/master/geo/tile) and [Let’s Make a (D3) Plugin](https://bost.ocks.org/mike/d3-plugin/)
+Derived from [d3-plugins/geo/tile](https://github.com/d3/d3-plugins/tree/master/geo/tile) and [Let’s Make a (D3) Plugin](https://bost.ocks.org/mike/d3-plugin/).
 
 ## Examples
-
 
 <table>
   <tr>
