@@ -28,7 +28,7 @@ If you use NPM, `npm install d3-tile`. Otherwise, download the [latest release](
 Constructs a layout for determining which 256x256 quadtree tiles to display in a rectangular viewport, based on a scale and translate. This layout can be used to create a simple slippy map, or render standard map tiles (e.g., MapBox, CloudMade) as a base layer behind a geographic projection.
 
 ```js
-var tile = d3.geoTile();
+var tile = d3.tile();
 ```
 
 <a href="#tile_size" name="tile_size">#</a> <i>tile</i>.<b>size</b>([<i>size</i>])
