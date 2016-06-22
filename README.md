@@ -32,7 +32,7 @@ var tile = d3.tile();
 
 ## API Reference
 
-<a href="#tile" name="tile">#</a> <b>tile</b>()
+<a href="#tile" name="tile">#</a> d3.<b>tile</b>()
 
 Constructs a layout for determining which 256x256 quadtree tiles to display in a rectangular viewport.
 
@@ -40,13 +40,23 @@ Constructs a layout for determining which 256x256 quadtree tiles to display in a
 var tile = d3.tile();
 ```
 
+<a href="#_tile" name="_tile">#</a> <i>tile</i>()
+
+Computes the set of 256x256 quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale) and [translate](#tile_translate). Returns an array of arrays that specify tile addresses as [*x*, *y*, *z*] where *z* is the zoom level. For example, the address of a tile from OpenStreetMap can be computed as follows, where *d* is an entry in the returned array.
+
+```js
+"http://a.tile.openstreetmap.org/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"
+```
+
+The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to an SVG G element containing the tile images where tile images have unit width and height, and *x*- and *y*-coordinates corresponding to the tile address. For example usage, see [Raster & Vector 4.0](http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9).
+
 <a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>])
 
 If *extent* is specified, sets this tile layout’s extent to the specified array of points [[*x0*, *y0*], [*x1*, *y1*]], where [*x0*, *y0*] is the top-left corner and [*x1*, *y1*] is the bottom-right corner, and returns this tile layout. If *extent* is not specified, returns the current layout extent.
 
 <a href="#tile_size" name="tile_size">#</a> <i>tile</i>.<b>size</b>([<i>size</i>])
 
-If *size* is specified, sets this tile layout’s size to the specified two-element array of numbers [*width*, *height*] and returns this tile layout. If *size* is not specified, returns the current layout size. This is a convenience method, equivalent to setting the extent to [[0, 0], [*width*, *height*]].
+If *size* is specified, sets this tile layout’s size to the specified two-element array of numbers [*width*, *height*] and returns this tile layout. If *size* is not specified, returns the current layout size. This is a convenience method equivalent to setting the [extent](#tile_extent) to [[0, 0], [*width*, *height*]].
 
 <a href="#tile_scale" name="tile_scale">#</a> <i>tile</i>.<b>scale</b>([<i>scale</i>])
 
@@ -55,13 +65,3 @@ If *scale* is specified, sets this tile layout’s scale to the specified number
 <a href="#tile_translate" name="tile_translate">#</a> <i>tile</i>.<b>translate</b>([<i>translate</i>])
 
 If *translate* is specified, sets this tile layout’s translate to the specified two-element array of numbers [*x*, *y*] and returns this tile layout. If *translate* is not specified, returns the current layout translate.
-
-<a href="#tile_size" name="tile_size">#</a> <i>tile</i>()
-
-Computes the set of 256x256 quadtree tiles to display given the current layout [size](#tile_size), [scale](#tile_scale) and [translate](#tile_translate). Returns an array of arrays that specify tile addresses as [*x*, *y*, *z*] where *z* is the zoom level. For example, the address of a tile from OpenStreetMap can be computed as follows, where *d* is an entry in the returned array.
-
-```js
-"http://a.tile.openstreetmap.org/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"
-```
-
-The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to an SVG G element containing the tile images where tile images have unit width and height, and *x*- and *y*-coordinates corresponding to the tile address. For example usage, see [Raster & Vector 4.0](http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9).
