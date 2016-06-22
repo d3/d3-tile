@@ -24,5 +24,8 @@
     "rollup": "0.32",
     "tape": "4",
     "uglify-js": "2"
+  },
+  "dependencies": {
+    "d3-array": "^1.0.0"
   }
 }
