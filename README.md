@@ -3,7 +3,19 @@ Image-based map tiles for use with D3.
 
 Derived from [d3-plugins/geo/tile/](https://github.com/d3/d3-plugins/tree/master/geo/tile) and [Let’s Make a (D3) Plugin](https://bost.ocks.org/mike/d3-plugin/)
 
-Example use: [Raster & Vector 4.0](http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9)
+## Examples
+
+
+<table>
+  <tr>
+    <td>
+      <a href="http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9">Raster & Vector 4.0</a>
+      <a href="http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9">
+        <img src="http://bl.ocks.org/curran/raw/e857dbe6db49d4cac379855b0b6b58e9/thumbnail.png">
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## Installing
 
