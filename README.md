@@ -1,5 +1,6 @@
 # d3-tile
-Image-based map tiles for use with D3.
+
+A D3 layout for working with image-based map tiles. This layout can be used to create a simple slippy map, or render standard map tiles (e.g., MapBox, CloudMade) as a base layer behind a geographic projection.
 
 Derived from [d3-plugins/geo/tile](https://github.com/d3/d3-plugins/tree/master/geo/tile) and [Let’s Make a (D3) Plugin](https://bost.ocks.org/mike/d3-plugin/).
 
@@ -25,7 +26,7 @@ If you use NPM, `npm install d3-tile`. Otherwise, download the [latest release](
 
 <a href="#tile" name="tile">#</a> <b>tile</b>()
 
-Constructs a layout for determining which 256x256 quadtree tiles to display in a rectangular viewport, based on a scale and translate. This layout can be used to create a simple slippy map, or render standard map tiles (e.g., MapBox, CloudMade) as a base layer behind a geographic projection.
+Constructs a layout for determining which 256x256 quadtree tiles to display in a rectangular viewport.
 
 ```js
 var tile = d3.tile();
