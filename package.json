@@ -9,10 +9,10 @@
   "license": "BSD-3-Clause",
   "main": "build/d3-tile.js",
   "jsnext:main": "index",
-  "homepage": "https://github.com/curran/d3-tile",
+  "homepage": "https://github.com/d3/d3-tile",
   "repository": {
     "type": "git",
-    "url": "https://github.com/curran/d3-tile.git"
+    "url": "https://github.com/d3/d3-tile.git"
   },
   "scripts": {
     "pretest": "rm -rf build && mkdir build && rollup -f umd -n d3 -o build/d3-tile.js -- index.js",
