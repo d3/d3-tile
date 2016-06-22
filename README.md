@@ -10,6 +10,7 @@ Derived from [d3-plugins/geo/tile/](https://github.com/d3/d3-plugins/tree/master
   <tr>
     <td>
       <a href="http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9">Raster & Vector 4.0</a>
+      <br>
       <a href="http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9">
         <img src="http://bl.ocks.org/curran/raw/e857dbe6db49d4cac379855b0b6b58e9/thumbnail.png">
       </a>
