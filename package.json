@@ -1,0 +1,28 @@
+{
+  "name": "d3-tile",
+  "version": "0.0.1",
+  "description": "{DESCRIPTION}",
+  "keywords": [
+    "d3",
+    "d3-module"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "build/d3-tile.js",
+  "jsnext:main": "index",
+  "homepage": "https://github.com/curran/d3-tile",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/curran/d3-tile.git"
+  },
+  "scripts": {
+    "pretest": "rm -rf build && mkdir build && rollup -f umd -n d3 -o build/d3-tile.js -- index.js",
+    "test": "tape 'test/**/*-test.js'",
+    "prepublish": "npm run test && uglifyjs build/d3-tile.js -c -m -o build/d3-tile.min.js",
+    "postpublish": "zip -j build/d3-tile.zip -- LICENSE README.md build/d3-tile.js build/d3-tile.min.js"
+  },
+  "devDependencies": {
+    "rollup": "0.32",
+    "tape": "4",
+    "uglify-js": "2"
+  }
+}
