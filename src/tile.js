@@ -29,6 +29,11 @@ export default function() {
 
     tiles.translate = [x / k, y / k];
     tiles.scale = k;
+
+    tiles.transform = zoomIdentity
+      .scale(tiles.scale)
+      .translate(tiles.translate[0], tiles.translate[1]);
+
     return tiles;
   }
 

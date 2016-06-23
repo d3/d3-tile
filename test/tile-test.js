@@ -43,3 +43,17 @@ tape("tile.transform", function(test) {
 
   test.end();
 });
+
+tape("tiles.transform", function(test) {
+  var width = 960,
+      height = 500,
+      tile = d3.tile()
+        .size([width, height])
+        .scale(4096)
+        .translate([1617, 747]),
+      tiles = tile();
+  test.deepEqual(tiles.transform, zoomIdentity
+    .scale(256)
+    .translate(-1.68359375, -5.08203125));
+  test.end();
+});
