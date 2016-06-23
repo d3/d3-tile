@@ -7,12 +7,11 @@ export default function() {
       y1 = 500,
       tx = (x0 + x1) / 2,
       ty = (y0 + y1) / 2,
-      scale = 256,
-      zoomDelta = 0;
+      scale = 256;
 
   function tile() {
     var z = Math.max(Math.log(scale) / Math.LN2 - 8, 0),
-        z0 = Math.round(z + zoomDelta),
+        z0 = Math.round(z),
         k = Math.pow(2, z - z0 + 8),
         x = tx - scale / 2,
         y = ty - scale / 2,
@@ -45,10 +44,6 @@ export default function() {
 
   tile.translate = function(_) {
     return arguments.length ? (tx = +_[0], ty = +_[1], tile) : [tx, ty];
-  };
-
-  tile.zoomDelta = function(_) {
-    return arguments.length ? (zoomDelta = +_, tile) : zoomDelta;
   };
 
   return tile;
