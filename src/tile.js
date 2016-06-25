@@ -8,21 +8,30 @@ export default function() {
       tx = (x0 + x1) / 2,
       ty = (y0 + y1) / 2,
       scale = 256,
-      zoomDelta = 0;
+      zoomDelta = 0,
+      wrap = true;
 
   function tile() {
     var z = Math.max(Math.log(scale) / Math.LN2 - 8, 0),
         z0 = Math.round(z + zoomDelta),
+        j = 1 << z0,
         k = Math.pow(2, z - z0 + 8),
         x = tx - scale / 2,
         y = ty - scale / 2,
         tiles = [],
-        cols = range(Math.max(0, Math.floor((x0 - x) / k)), Math.max(0, Math.ceil((x1 - x) / k))),
-        rows = range(Math.max(0, Math.floor((y0 - y) / k)), Math.max(0, Math.ceil((y1 - y) / k)));
+        cols = range(
+          Math.max(wrap ? -Infinity : 0, Math.floor((x0 - x) / k)),
+          Math.min(Math.ceil((x1 - x) / k), wrap ? Infinity : j)
+        ),
+        rows = range(
+          Math.max(0, Math.floor((y0 - y) / k)),
+          Math.min(Math.ceil((y1 - y) / k), j)
+        );
 
     rows.forEach(function(y) {
       cols.forEach(function(x) {
-        tiles.push([x, y, z0]);
+        var xWrapped = (x % j + j) % j;
+        tiles.push([x, y, z0, xWrapped]);
       });
     });
 
@@ -49,6 +58,10 @@ export default function() {
 
   tile.zoomDelta = function(_) {
     return arguments.length ? (zoomDelta = +_, tile) : zoomDelta;
+  };
+
+  tile.wrap = function(_) {
+    return arguments.length ? (wrap = _, tile) : wrap;
   };
 
   return tile;
