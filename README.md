@@ -63,7 +63,7 @@ Computes the set of 256x256 quadtree tiles to display given the current layout [
 "http://a.tile.openstreetmap.org/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"
 ```
 
-The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to an SVG G element containing the tile images where tile images have unit width and height, and *x*- and *y*-coordinates corresponding to the tile address. For example usage, see [Raster & Vector 4.0](http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9).
+The returned array also has `scale`, `translate`, and `transform` properties that can be used to apply the correct transformation to an SVG G element containing the tile images where tile images have unit width and height, and *x*- and *y*-coordinates corresponding to the tile address. For example usage, see [Raster & Vector 4.0](http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9).
 
 <a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>])
 
@@ -80,3 +80,19 @@ If *scale* is specified, sets this tile layout’s scale to the specified number
 <a href="#tile_translate" name="tile_translate">#</a> <i>tile</i>.<b>translate</b>([<i>translate</i>])
 
 If *translate* is specified, sets this tile layout’s translate to the specified two-element array of numbers [*x*, *y*] and returns this tile layout. If *translate* is not specified, returns the current layout translate.
+
+<a href="#tile_transform" name="tile_transform">#</a> <i>tile</i>.<b>transform</b>([<i>transform</i>])
+
+If *transform* is specified, sets this tile layout’s scale and translate from the specified [zoom transform](https://github.com/d3/d3-zoom#zoom-transforms) and returns this tile layout. If *transform* is not specified, returns the current layout scale and translate as a transform.
+
+The following two invocations are equivalent:
+
+```js
+tile.transform(transform);
+```
+
+```js
+tile
+  .scale(transform.k)
+  .translate([transform.x, transform.y]);
+```

@@ -1,4 +1,5 @@
 import {range} from "d3-array";
+import {zoomIdentity} from "d3-zoom";
 
 export default function() {
   var x0 = 0,
@@ -28,6 +29,11 @@ export default function() {
 
     tiles.translate = [x / k, y / k];
     tiles.scale = k;
+
+    tiles.transform = zoomIdentity
+      .scale(tiles.scale)
+      .translate(tiles.translate[0], tiles.translate[1]);
+
     return tiles;
   }
 
@@ -45,6 +51,14 @@ export default function() {
 
   tile.translate = function(_) {
     return arguments.length ? (tx = +_[0], ty = +_[1], tile) : [tx, ty];
+  };
+
+  tile.transform = function(_) {
+    if(arguments.length){
+      return tile.scale(_.k).translate([_.x, _.y]);
+    } else {
+      return zoomIdentity.translate(tx, ty).scale(scale);
+    }
   };
 
   tile.zoomDelta = function(_) {
