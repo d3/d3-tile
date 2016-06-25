@@ -1,6 +1,6 @@
 # d3-tile
 
-A D3 layout for working with image-based map tiles. This layout can be used to create a simple slippy map, or render standard map tiles (e.g., MapBox, CloudMade) as a base layer behind a geographic projection.
+A layout for working with image-based map tiles. This can be used to create a simple slippy map, or to render standard map tiles (*e.g.*, Mapbox, Mapzen, CloudMade, Bing) as a base layer behind a vector layer.
 
 <table>
   <tr>
