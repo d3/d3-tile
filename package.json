@@ -28,6 +28,7 @@
     "d3-array": "1"
   },
   "devDependencies": {
+    "d3-zoom": "^1.0.0",
     "eslint": "2",
     "package-preamble": "0.0",
     "rollup": "0.31",
