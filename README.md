@@ -55,9 +55,9 @@ Constructs a layout for determining which 256x256 quadtree tiles to display in a
 var tile = d3.tile();
 ```
 
-<a href="#_tile" name="_tile">#</a> <i>tile</i>()
+<a href="#_tile" name="_tile">#</a> <i>tile</i>(transform)
 
-Computes the set of 256x256 quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale) and [translate](#tile_translate). Returns an array of arrays that specify tile addresses as [*x*, *y*, *z*] where *z* is the zoom level. For example, the address of a tile from OpenStreetMap can be computed as follows, where *d* is an entry in the returned array.
+Computes the set of 256x256 quadtree tiles to display given the current layout [extent](#tile_extent) and the specified *[transform](https://github.com/d3/d3-zoom#zoom-transforms)*. Returns an array of arrays that specify tile addresses as [*x*, *y*, *z*] where *z* is the zoom level. For example, the address of a tile from OpenStreetMap can be computed as follows, where *d* is an entry in the returned array.
 
 ```js
 "http://a.tile.openstreetmap.org/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"
@@ -72,11 +72,3 @@ If *extent* is specified, sets this tile layout’s extent to the specified arra
 <a href="#tile_size" name="tile_size">#</a> <i>tile</i>.<b>size</b>([<i>size</i>])
 
 If *size* is specified, sets this tile layout’s size to the specified two-element array of numbers [*width*, *height*] and returns this tile layout. If *size* is not specified, returns the current layout size. This is a convenience method equivalent to setting the [extent](#tile_extent) to [[0, 0], [*width*, *height*]].
-
-<a href="#tile_scale" name="tile_scale">#</a> <i>tile</i>.<b>scale</b>([<i>scale</i>])
-
-If *scale* is specified, sets this tile layout’s scale to the specified number *scale* and returns this tile layout. If *scale* is not specified, returns the current layout scale.
-
-<a href="#tile_translate" name="tile_translate">#</a> <i>tile</i>.<b>translate</b>([<i>translate</i>])
-
-If *translate* is specified, sets this tile layout’s translate to the specified two-element array of numbers [*x*, *y*] and returns this tile layout. If *translate* is not specified, returns the current layout translate.
