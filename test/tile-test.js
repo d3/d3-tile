@@ -1,18 +1,18 @@
 var tape = require("tape"),
-    d3 = require("../");
+    d3 = require("../"),
+    zoomIdentity = require("d3-zoom").zoomIdentity;
 
 tape("tile", function(test) {
   var width = 960,
       height = 500,
       tile = d3.tile()
-        .size([width, height])
-        .scale(4096)
-        .translate([1617, 747]),
-      tiles = tile();
+        .size([width, height]),
+      transform = zoomIdentity
+        .translate(1617, 747)
+        .scale(4096),
+      tiles = tile(transform);
 
   test.deepEqual(tile.size(), [width, height]);
-  test.equal(tile.scale(), 4096);
-  test.deepEqual(tile.translate(), [1617, 747]);
 
   test.equal(tiles.scale, 256);
   test.equal(tiles.translate[0], -1.68359375);
