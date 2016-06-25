@@ -15,8 +15,9 @@ tape("tile", function(test) {
   test.deepEqual(tile.translate(), [1617, 747]);
 
   test.equal(tiles.transform.k, 256);
-  test.equal(tiles.transform.x, -1.68359375 * 256);
-  test.equal(tiles.transform.y, -5.08203125 * 256);
+  test.equal(tiles.transform.x, -431);
+  test.equal(tiles.transform.y, -1301);
+  test.equal(tiles.transform.toString(), "translate(-431,-1301) scale(256)");
 
   test.equal(tiles.length, 15);
 
