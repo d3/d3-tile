@@ -6,23 +6,25 @@ A D3 layout for working with image-based map tiles. This layout can be used to c
   <tr>
     <td>
       <a href="http://bl.ocks.org/mbostock/94b9fd26e12c586f342d">Raster & Vector I
-      <br><img src="http://bl.ocks.org/mbostock/raw/94b9fd26e12c586f342d/thumbnail.png"></a>
+      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/94b9fd26e12c586f342d/thumbnail.png"></a>
     </td>
     <td>
       <a href="http://bl.ocks.org/mbostock/5342063">Raster & Vector II
-      <br><img src="http://bl.ocks.org/mbostock/raw/5342063/thumbnail.png"></a>
+      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/5342063/thumbnail.png"></a>
     </td>
     <td>
       <a href="http://bl.ocks.org/mbostock/5914438">Raster & Vector III
-      <br><img src="http://bl.ocks.org/mbostock/raw/5914438/thumbnail.png"></a>
+      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/5914438/thumbnail.png"></a>
     </td>
     <td>
       <a href="http://bl.ocks.org/mbostock/9535021">Raster & Vector IV
-      <br><img src="http://bl.ocks.org/mbostock/raw/9535021/thumbnail.png"></a>
+      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/9535021/thumbnail.png"></a>
     </td>
+  </tr>
+  <tr>
     <td>
       <a href="http://bl.ocks.org/mbostock/eb0c48375fcdcdc00c54a92724733d0d">Tile by Bounding Box
-      <br><img src="http://bl.ocks.org/mbostock/raw/eb0c48375fcdcdc00c54a92724733d0d/thumbnail.png"></a>
+      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/eb0c48375fcdcdc00c54a92724733d0d/thumbnail.png"></a>
     </td>
   </tr>
 </table>
