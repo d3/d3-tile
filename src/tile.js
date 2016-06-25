@@ -1,4 +1,5 @@
 import {range} from "d3-array";
+import Transform from "./transform";
 
 export default function() {
   var x0 = 0,
@@ -26,8 +27,8 @@ export default function() {
       });
     });
 
-    tiles.translate = [x / k, y / k];
-    tiles.scale = k;
+    tiles.transform = new Transform(k, x, y);
+
     return tiles;
   }
 
