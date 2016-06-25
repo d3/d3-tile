@@ -11,6 +11,13 @@ A D3 layout for working with image-based map tiles. This layout can be used to c
         <img src="http://bl.ocks.org/curran/raw/e857dbe6db49d4cac379855b0b6b58e9/thumbnail.png">
       </a>
     </td>
+    <td>
+      <a href="http://bl.ocks.org/mbostock/eb0c48375fcdcdc00c54a92724733d0d">Tile by Bounding Box</a>
+      <br>
+      <a href="http://bl.ocks.org/mbostock/eb0c48375fcdcdc00c54a92724733d0d">
+        <img src="http://bl.ocks.org/mbostock/raw/eb0c48375fcdcdc00c54a92724733d0d/thumbnail.png">
+      </a>
+    </td>
   </tr>
 </table>
 
