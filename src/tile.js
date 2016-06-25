@@ -9,15 +9,11 @@ export default function() {
 
   function tile(t) {
 
-    var scale = t.k,
-        tx = t.x,
-        ty = t.y,
-
-        z = Math.max(Math.log(scale) / Math.LN2 - 8, 0),
+    var z = Math.max(Math.log(t.k) / Math.LN2 - 8, 0),
         z0 = Math.round(z + zoomDelta),
         k = Math.pow(2, z - z0 + 8),
-        x = tx - scale / 2,
-        y = ty - scale / 2,
+        x = t.x - t.k / 2,
+        y = t.y - t.k / 2,
         tiles = [],
         cols = range(Math.max(0, Math.floor((x0 - x) / k)), Math.max(0, Math.ceil((x1 - x) / k))),
         rows = range(Math.max(0, Math.floor((y0 - y) / k)), Math.max(0, Math.ceil((y1 - y) / k)));
