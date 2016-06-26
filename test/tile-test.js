@@ -46,3 +46,16 @@ tape("size uses default values", function(test) {
   test.equal(size[1], 500);
   test.end();
 });
+
+tape("wrap", function(test) {
+  var tile = d3.tile()
+        .scale(1 << 8)
+        .translate([480, 250]);
+      tiles = tile();
+  test.equal(tile.wrap(), true);
+  test.equal(tile().length, 5);
+  test.equal(tile.wrap(false), tile);
+  test.equal(tile.wrap(), false);
+  test.equal(tile().length, 1);
+  test.end();
+});
