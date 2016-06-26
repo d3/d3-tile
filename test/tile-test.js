@@ -39,3 +39,10 @@ tape("tile", function(test) {
 
   test.end();
 });
+
+tape("size uses default values", function(test) {
+  var size = d3.tile().size();
+  test.equal(size[0], 960);
+  test.equal(size[1], 500);
+  test.end();
+});
