@@ -57,13 +57,7 @@ var tile = d3.tile();
 
 <a href="#_tile" name="_tile">#</a> <i>tile</i>()
 
-Computes the set of 256x256 quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale) and [translate](#tile_translate). Returns an array of arrays that specify tile addresses as [*x*, *y*, *z*] where *z* is the zoom level. For example, the address of a tile from OpenStreetMap can be computed as follows, where *d* is an entry in the returned array.
-
-```js
-"http://a.tile.openstreetmap.org/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"
-```
-
-The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to an SVG G element containing the tile images where tile images have unit width and height, and *x*- and *y*-coordinates corresponding to the tile address. For example usage, see [Raster & Vector 4.0](http://bl.ocks.org/curran/e857dbe6db49d4cac379855b0b6b58e9).
+Computes the set of 256x256 quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale) and [translate](#tile_translate). Returns an array of arrays that specify tile addresses as [*x*, *y*, *z*] where *z* is the zoom level and *x* is periodic if [wrap](#tile_wrap) is set to *true*. Each element of the returned array also has properties *x* and *y*, which represents the offset by which the tile can be positioned. These values correspond to the *x* and *y* tile address values multiplied by 256, but without wrapping logic applied to the *x* value. The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to tile images. For example usage, see [Raster & Vector III](http://bl.ocks.org/mbostock/5914438).
 
 <a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>])
 
@@ -80,3 +74,15 @@ If *scale* is specified, sets this tile layout’s scale to the specified number
 <a href="#tile_translate" name="tile_translate">#</a> <i>tile</i>.<b>translate</b>([<i>translate</i>])
 
 If *translate* is specified, sets this tile layout’s translate to the specified two-element array of numbers [*x*, *y*] and returns this tile layout. If *translate* is not specified, returns the current layout translate.
+
+<a href="#tile_wrap" name="tile_wrap">#</a> <i>tile</i>.<b>wrap</b>([<i>wrap</i>])
+
+If *wrap* is specified, sets this tile layout’s wrapping option to the specified boolean value and returns this tile layout. If *wrap* is not specified, returns the current wrapping option, which defaults to *true*.
+
+If *wrap* is *true*, wrapping logic will be applied to tile address *x* values when the layout is evaluated. This will cause map tiles to be displayed in a periodic manner, going beyond longitude values between -180 and 180.
+
+![image](https://cloud.githubusercontent.com/assets/68416/16361957/130fb410-3bbe-11e6-8d8b-f9b77665b767.png)
+
+If *wrap* is *false*, wrapping logic will be disabled, limiting tiles to be within longitude values between -180 and 180.
+
+![image](https://cloud.githubusercontent.com/assets/68416/16361955/f2f4533e-3bbd-11e6-9540-2277eebcda85.png)
