@@ -30,8 +30,10 @@ export default function() {
 
     rows.forEach(function(y) {
       cols.forEach(function(x) {
-        var xWrapped = (x % j + j) % j;
-        tiles.push([x, y, z0, xWrapped]);
+        var d = [(x % j + j) % j, y, z0];
+        d.x = x * 256;
+        d.y = y * 256;
+        tiles.push(d);
       });
     });
 

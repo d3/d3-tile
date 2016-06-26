@@ -18,8 +18,24 @@ tape("tile", function(test) {
   test.equal(tiles.translate[0], -1.68359375);
   test.equal(tiles.translate[1], -5.08203125);
   test.equal(tiles.length, 15);
-  test.deepEqual(tiles[0], [ 1, 5, 4, 1 ]);
-  test.deepEqual(tiles[1], [ 2, 5, 4, 2 ]);
-  test.deepEqual(tiles[2], [ 3, 5, 4, 3 ]);
+
+  test.equal(tiles[0][0], 1);
+  test.equal(tiles[0][1], 5);
+  test.equal(tiles[0][2], 4);
+  test.equal(tiles[0].x, 256);
+  test.equal(tiles[0].y, 5 * 256);
+
+  test.equal(tiles[1][0], 2);
+  test.equal(tiles[1][1], 5);
+  test.equal(tiles[1][2], 4);
+  test.equal(tiles[1].x, 2 * 256);
+  test.equal(tiles[1].y, 5 * 256);
+
+  test.equal(tiles[2][0], 3);
+  test.equal(tiles[2][1], 5);
+  test.equal(tiles[2][2], 4);
+  test.equal(tiles[2].x, 3 * 256);
+  test.equal(tiles[2].y, 5 * 256);
+
   test.end();
 });
