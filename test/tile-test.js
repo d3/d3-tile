@@ -18,8 +18,64 @@ tape("tile", function(test) {
   test.equal(tiles.translate[0], -1.68359375);
   test.equal(tiles.translate[1], -5.08203125);
   test.equal(tiles.length, 15);
-  test.deepEqual(tiles[0], [ 1, 5, 4 ]);
-  test.deepEqual(tiles[1], [ 2, 5, 4 ]);
-  test.deepEqual(tiles[2], [ 3, 5, 4 ]);
+
+  var d = [1, 5, 4];
+  d.x = 256;
+  d.y = 5 * 256;
+  test.deepEqual(tiles[0], d);
+
+  d = [2, 5, 4];
+  d.x = 2 * 256;
+  d.y = 5 * 256;
+  test.deepEqual(tiles[1], d);
+
+  d = [3, 5, 4];
+  d.x = 3 * 256;
+  d.y = 5 * 256;
+  test.deepEqual(tiles[2], d);
+
+  test.end();
+});
+
+tape("size uses default values", function(test) {
+  var size = d3.tile().size();
+  test.equal(size[0], 960);
+  test.equal(size[1], 500);
+  test.end();
+});
+
+tape("wrap", function(test) {
+  var tile = d3.tile()
+        .scale(1 << 8)
+        .translate([480, 250]),
+      tiles = tile();
+
+  test.equal(tile.wrap(), true);
+  test.equal(tile().length, 5);
+
+  var d = [0, 0, 0];
+  d.x = -512;
+  d.y = 0;
+  test.deepEqual(tiles[0], d);
+
+  d.x = -256;
+  test.deepEqual(tiles[1], d);
+
+  d.x = 0;
+  test.deepEqual(tiles[2], d);
+
+  d.x = 256;
+  test.deepEqual(tiles[3], d);
+
+  d.x = 512;
+  test.deepEqual(tiles[4], d);
+
+  test.equal(tile.wrap(false), tile);
+  test.equal(tile.wrap(), false);
+  test.equal(tile().length, 1);
+
+  d.x = -512;
+  test.deepEqual(tiles[0], d);
+
   test.end();
 });
