@@ -79,10 +79,12 @@ If *translate* is specified, sets this tile layout’s translate to the specifie
 
 If *wrap* is specified, sets this tile layout’s wrapping option to the specified boolean value and returns this tile layout. If *wrap* is not specified, returns the current wrapping option, which defaults to *true*.
 
+![image](https://cloud.githubusercontent.com/assets/68416/16513800/0c158872-3f85-11e6-84c6-e481b7e0af5d.png)
+<p align="center"><b>wrap</b>(<i>true</i>)</p>
+
 If *wrap* is *true*, wrapping logic will be applied to tile address *x* values when the layout is evaluated. This will cause map tiles to be displayed in a periodic manner, going beyond longitude values between -180 and 180.
 
-![image](https://cloud.githubusercontent.com/assets/68416/16361957/130fb410-3bbe-11e6-8d8b-f9b77665b767.png)
+![image](https://cloud.githubusercontent.com/assets/68416/16513812/2644b43e-3f85-11e6-83fc-a34a37c852ab.png)
+<p align="center"><b>wrap</b>(<i>false</i>)</p>
 
 If *wrap* is *false*, wrapping logic will be disabled, limiting tiles to be within longitude values between -180 and 180.
-
-![image](https://cloud.githubusercontent.com/assets/68416/16361955/f2f4533e-3bbd-11e6-9540-2277eebcda85.png)
