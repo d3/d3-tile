@@ -1,5 +1,5 @@
 import {range} from "d3-array";
-import Transform from "./transform";
+import TileTransform from "./tileTransform";
 
 export default function() {
   var x0 = 0,
@@ -38,7 +38,7 @@ export default function() {
       });
     });
 
-    tiles.transform = new Transform(k, x, y);
+    tiles.transform = new TileTransform(k, x, y);
 
     return tiles;
   }
