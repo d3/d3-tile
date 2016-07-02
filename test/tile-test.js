@@ -45,10 +45,19 @@ tape("tile", function(test) {
   test.end();
 });
 
-tape("size uses default values", function(test) {
-  var size = d3.tile().size();
-  test.equal(size[0], 960);
-  test.equal(size[1], 500);
+tape("size and extent", function(test) {
+  var tileLayout = d3.tile();
+  test.deepEqual(tileLayout.size(), [960, 500]);
+  test.deepEqual(tileLayout.extent(), [[0, 0], [960, 500]]);
+
+  tileLayout.size([200, 300]);
+  test.deepEqual(tileLayout.size(), [200, 300]);
+  test.deepEqual(tileLayout.extent(), [[0, 0], [200, 300]]);
+
+  tileLayout.extent([[100, 200], [300, 350]]);
+  test.deepEqual(tileLayout.size(), [200, 150]); // Currently fails - actual: [ 300, 350 ]
+  test.deepEqual(tileLayout.extent(), [[100, 200], [300, 350]]);
+
   test.end();
 });
 
