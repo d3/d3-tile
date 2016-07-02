@@ -30,10 +30,13 @@ export default function() {
 
     rows.forEach(function(y) {
       cols.forEach(function(x) {
-        var d = [(x % j + j) % j, y, z0];
-        d.tx = x * 256;
-        d.ty = y * 256;
-        tiles.push(d);
+        tiles.push({
+          x: (x % j + j) % j,
+          y: y,
+          z: z0,
+          tx: x * 256,
+          ty: y * 256
+        });
       });
     });
 

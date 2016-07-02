@@ -2,10 +2,13 @@ var tape = require("tape"),
     d3 = require("../");
 
 function tile(x, y, z, tx, ty) {
-  var d = [x, y, z];
-  d.tx = tx;
-  d.ty = ty;
-  return d;
+  return {
+    x: x,
+    y: y,
+    z: z,
+    tx: tx,
+    ty: ty
+  };
 }
 
 tape("tile", function(test) {
