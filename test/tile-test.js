@@ -55,7 +55,7 @@ tape("size and extent", function(test) {
   test.deepEqual(tileLayout.extent(), [[0, 0], [200, 300]]);
 
   tileLayout.extent([[100, 200], [300, 350]]);
-  test.deepEqual(tileLayout.size(), [200, 150]); // Currently fails - actual: [ 300, 350 ]
+  test.deepEqual(tileLayout.size(), [200, 150]);
   test.deepEqual(tileLayout.extent(), [[100, 200], [300, 350]]);
 
   test.end();
