@@ -31,8 +31,8 @@ export default function() {
     rows.forEach(function(y) {
       cols.forEach(function(x) {
         var d = [(x % j + j) % j, y, z0];
-        d.x = x * 256;
-        d.y = y * 256;
+        d.tx = x * 256;
+        d.ty = y * 256;
         tiles.push(d);
       });
     });

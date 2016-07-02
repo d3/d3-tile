@@ -3,8 +3,8 @@ var tape = require("tape"),
 
 function tile(x, y, z, tx, ty) {
   var d = [x, y, z];
-  d.x = tx;
-  d.y = ty;
+  d.tx = tx;
+  d.ty = ty;
   return d;
 }
 
