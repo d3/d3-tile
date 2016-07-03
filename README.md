@@ -57,7 +57,15 @@ var tile = d3.tile();
 
 <a href="#_tile" name="_tile">#</a> <i>tile</i>()
 
-Computes the set of 256x256 quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale) and [translate](#tile_translate). Returns an array of arrays that specify tile addresses as [*x*, *y*, *z*] where *z* is the zoom level and *x* is periodic if [wrap](#tile_wrap) is set to *true*. Each element of the returned array also has properties *x* and *y*, which represents the offset by which the tile can be positioned. These values correspond to the *x* and *y* tile address values multiplied by 256, but without wrapping logic applied to the *x* value. The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to tile images. For example usage, see [Raster & Vector III](http://bl.ocks.org/mbostock/5914438).
+Computes the set of 256x256 quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale) and [translate](#tile_translate). Returns an array of objects with the following properties:
+
+ * `x` The integer X coordinate of the tile address. Periodic if [wrap](#tile_wrap) is set to *true*.
+ * `y` The integer Y coordinate of the tile address.
+ * `z` The integer Z coordinate of the tile address (zoom level).
+ * `tx` The X translate to be applied to the tile. This is the `x` value multiplied by 256, but without wrapping logic applied.
+ * `ty` The Y translate to be applied to the tile. This is the `y` value multiplied by 256.
+
+The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to the group of tile images. For example usage, see [Raster & Vector III](http://bl.ocks.org/mbostock/5914438).
 
 <a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>])
 
