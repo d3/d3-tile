@@ -44,8 +44,8 @@ A layout for working with image-based map tiles. This can be used to create a si
 If you use NPM, `npm install d3-tile`. Otherwise, download the [latest release](https://github.com/d3/d3-tile/releases/latest). You can also load directly from [d3js.org](https://d3js.org) as a [standalone library](https://d3js.org/d3-tile.v0.0.min.js). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
 
 ```html
-<script src="https://unpkg.com/d3-array@1.0.2/build/d3-array.js"></script>
-<script src="https://unpkg.com/d3-tile@0.0.4/build/d3-tile.js"></script>
+<script src="https://unpkg.com/d3-array@1.0"></script>
+<script src="https://unpkg.com/d3-tile@0.0"></script>
 <script>
 
 var tile = d3.tile();
