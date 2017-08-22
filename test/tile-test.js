@@ -81,3 +81,34 @@ tape("wrap", function(test) {
 
   test.end();
 });
+
+tape("tileSize", function(test) {
+  var tileLayout256 = d3.tile()
+        .scale(1 << 8)
+        .translate([480, 250]),
+      tiles256 = tileLayout256();
+
+  test.equal(tileLayout256.tileSize(), 256);
+  test.equal(tiles256.length, 5);
+
+  test.deepEqual(tiles256[0], tile(0, 0, 0, -2 * 256, 0));
+  test.deepEqual(tiles256[1], tile(0, 0, 0, -1 * 256, 0));
+  test.deepEqual(tiles256[2], tile(0, 0, 0, 0 * 256, 0));
+  test.deepEqual(tiles256[3], tile(0, 0, 0, 1 * 256, 0));
+  test.deepEqual(tiles256[4], tile(0, 0, 0, 2 * 256, 0));
+
+  var tileLayout512 = d3.tile()
+        .tileSize(512)
+        .scale(1 << 8)
+        .translate([480, 250]),
+      tiles512 = tileLayout512();
+
+  test.equal(tileLayout512.tileSize(), 512);
+  test.equal(tiles512.length, 3);
+
+  test.deepEqual(tiles512[0], tile(0, 0, 0, -1 * 512, 0));
+  test.deepEqual(tiles512[1], tile(0, 0, 0, 0 * 512, 0));
+  test.deepEqual(tiles512[2], tile(0, 0, 0, 1 * 512, 0));
+
+  test.end();
+});
