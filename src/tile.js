@@ -13,10 +13,11 @@ export default function() {
       wrap = true;
 
   function tile() {
-    var z = Math.max(Math.log(scale) / Math.LN2 - Math.log2(tileSize), 0),
+    var log2tileSize = Math.log(tileSize) / Math.log(2),
+        z = Math.max(Math.log(scale) / Math.LN2 - log2tileSize, 0),
         z0 = Math.round(z + zoomDelta),
         j = 1 << z0,
-        k = Math.pow(2, z - z0 + Math.log2(tileSize)),
+        k = Math.pow(2, z - z0 + log2tileSize),
         x = tx - scale / 2,
         y = ty - scale / 2,
         tiles = [],
