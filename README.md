@@ -59,7 +59,7 @@ var tile = d3.tile();
 
 <a href="#tile" name="tile">#</a> d3.<b>tile</b>()
 
-Constructs a layout for determining which 256x256 quadtree tiles to display in a rectangular viewport.
+Constructs a layout for determining which quadtree tiles to display in a rectangular viewport.
 
 ```js
 var tile = d3.tile();
@@ -67,13 +67,13 @@ var tile = d3.tile();
 
 <a href="#_tile" name="_tile">#</a> <i>tile</i>()
 
-Computes the set of 256x256 quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale) and [translate](#tile_translate). Returns an array of objects with the following properties:
+Computes the set of quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale), [translate](#tile_translate) and [tileSize](#tile_tileSize). Returns an array of objects with the following properties:
 
  * `x` The integer X coordinate of the tile address. Periodic if [wrap](#tile_wrap) is set to *true*.
  * `y` The integer Y coordinate of the tile address.
  * `z` The integer Z coordinate of the tile address (zoom level).
- * `tx` The X translate to be applied to the tile. This is the `x` value multiplied by 256, but without wrapping logic applied.
- * `ty` The Y translate to be applied to the tile. This is the `y` value multiplied by 256.
+ * `tx` The X translate to be applied to the tile. This is the `x` value multiplied by [tileSize](#tile_tileSize), but without wrapping logic applied.
+ * `ty` The Y translate to be applied to the tile. This is the `y` value multiplied by [tileSize](#tile_tileSize).
 
 The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to the group of tile images. For example usage, see [Raster & Vector III](http://bl.ocks.org/mbostock/5914438).
 
@@ -106,3 +106,7 @@ If *wrap* is *true*, wrapping logic will be applied to tile address *x* values w
 <p align="center"><b>wrap</b>(<i>false</i>)</p>
 
 If *wrap* is *false*, wrapping logic will be disabled, limiting tiles to be within longitude values between -180 and 180.
+
+<a href="#tile_tileSize" name="tile_tileSize">#</a> <i>tile</i>.<b>tileSize</b>([<i>tileSize</i>])
+
+If *tileSize* is specified, sets this tile layout’s individual tile widths and heights to the specified number *tileSize* and returns this tile layout. If *tileSize* is not specified, returns the current layout tile size, which defaults to 256, the most common tile size among tile service providers.

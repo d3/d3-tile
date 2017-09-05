@@ -7,15 +7,17 @@ export default function() {
       y1 = 500,
       tx = (x0 + x1) / 2,
       ty = (y0 + y1) / 2,
+      tileSize = 256,
       scale = 256,
       zoomDelta = 0,
       wrap = true;
 
   function tile() {
-    var z = Math.max(Math.log(scale) / Math.LN2 - 8, 0),
+    var log2tileSize = Math.log(tileSize) / Math.log(2),
+        z = Math.max(Math.log(scale) / Math.LN2 - log2tileSize, 0),
         z0 = Math.round(z + zoomDelta),
         j = 1 << z0,
-        k = Math.pow(2, z - z0 + 8),
+        k = Math.pow(2, z - z0 + log2tileSize),
         x = tx - scale / 2,
         y = ty - scale / 2,
         tiles = [],
@@ -34,8 +36,8 @@ export default function() {
           x: (x % j + j) % j,
           y: y,
           z: z0,
-          tx: x * 256,
-          ty: y * 256
+          tx: x * tileSize,
+          ty: y * tileSize
         });
       });
     });
@@ -67,6 +69,10 @@ export default function() {
 
   tile.wrap = function(_) {
     return arguments.length ? (wrap = _, tile) : wrap;
+  };
+
+  tile.tileSize = function(_) {
+    return arguments.length ? (tileSize = _, tile) : tileSize;
   };
 
   return tile;
