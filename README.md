@@ -40,6 +40,10 @@ A layout for working with image-based map tiles. This can be used to create a si
       <a href="http://bl.ocks.org/linusmarco/c75b1d8b0e4996c1eb8a7d9d296636e9">Wrapping Example
       <br><img width="230" height="120" src="http://bl.ocks.org/linusmarco/raw/c75b1d8b0e4996c1eb8a7d9d296636e9/thumbnail.png"></a>
     </td>
+    <td>
+      <a href="http://bl.ocks.org/linusmarco/71f80d7c8a53981f5bbfab8167f32a10">Dynamic tileSize Example
+      <br><img width="230" height="120" src="http://bl.ocks.org/linusmarco/raw/71f80d7c8a53981f5bbfab8167f32a10/thumbnail.png"></a>
+    </td>
   </tr>
 </table>
 
