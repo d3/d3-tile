@@ -36,6 +36,10 @@ A layout for working with image-based map tiles. This can be used to create a si
       <a href="http://bl.ocks.org/curran/96823ad84b0415536980b1cbf57b1dcc">Cross Country Trip
       <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/96823ad84b0415536980b1cbf57b1dcc/thumbnail.png"></a>
     </td>
+    <td>
+      <a href="http://bl.ocks.org/linusmarco/c75b1d8b0e4996c1eb8a7d9d296636e9">Wrapping Example
+      <br><img width="230" height="120" src="http://bl.ocks.org/linusmarco/raw/c75b1d8b0e4996c1eb8a7d9d296636e9/thumbnail.png"></a>
+    </td>
   </tr>
 </table>
 
