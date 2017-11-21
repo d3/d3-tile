@@ -47,6 +47,38 @@ A layout for working with image-based map tiles. This can be used to create a si
   </tr>
 </table>
 
+## Note on Migrating From v0.0.3 to v0.0.4
+Previously in `v0.0.3` of `d3-tile`, the following: 
+
+```js
+var tile = d3.tile();
+tile();
+``` 
+
+Returned a two dimensional array data structure, where each the index of each inner array corresponded to `z`, `x`, and `y`:
+
+```js
+[
+  [273, 376, 10],
+  [274, 376, 10],
+  [275, 376, 10],
+  // etc...
+]
+```
+
+In the `v0.0.4` of `d3-tile`, the data structured has become:
+
+```js
+[
+  {x: 273, y: 376, z: 10, tx: 69888, ty: 96256},
+  {x: 274, y: 376, z: 10, tx: 70144, ty: 96256},
+  {x: 275, y: 376, z: 10, tx: 70400, ty: 96256},
+  // etc...
+]
+```
+
+As a result, the examples listed above will need to be modified if using a version of `d3-tile` > `v0.0.3`.
+
 ## Installing
 
 If you use NPM, `npm install d3-tile`. Otherwise, download the [latest release](https://github.com/d3/d3-tile/releases/latest). You can also load directly from [unpkg.com](https://unpkg.com) as a [standalone library](https://unpkg.com/d3-tile@0.0). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
