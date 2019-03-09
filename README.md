@@ -5,30 +5,30 @@ A layout for working with image-based map tiles. This can be used to create a si
 <table>
   <tr>
     <td>
-      <a href="http://bl.ocks.org/mbostock/94b9fd26e12c586f342d">Raster & Vector I
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/94b9fd26e12c586f342d/thumbnail.png"></a>
+      <a href="http://bl.ocks.org/curran/6df9bb477f8d93e3de2855980f70ace3">Raster & Vector I
+      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/6df9bb477f8d93e3de2855980f70ace3/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/mbostock/5342063">Raster & Vector II
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/5342063/thumbnail.png"></a>
+      <a href="http://bl.ocks.org/curran/d0a49f5ef93acd8f220d505d186a6172">Raster & Vector II
+      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/d0a49f5ef93acd8f220d505d186a6172/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/mbostock/5914438">Raster & Vector III
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/5914438/thumbnail.png"></a>
+      <a href="http://bl.ocks.org/curran/7f355dc5f8d4722c01b40f0566d5b4c3">Raster & Vector III
+      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/7f355dc5f8d4722c01b40f0566d5b4c3/thumbnail.png"></a>
     </td>
   </tr>
   <tr>
     <td>
-      <a href="http://bl.ocks.org/mbostock/9535021">Raster & Vector IV
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/9535021/thumbnail.png"></a>
+      <a href="http://bl.ocks.org/curran/ba11b173edcf17020cd076eaddbe1654">Raster & Vector IV
+      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/ba11b173edcf17020cd076eaddbe1654/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/mbostock/5593150">Vector Tiles
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/5593150/thumbnail.png"></a>
+      <a href="https://observablehq.com/@mbostock/d3-vector-tiles">D3 Vector Tiles
+      <br><img width="230" height="120" src="https://user-images.githubusercontent.com/68416/54068670-50759200-4275-11e9-9a7a-c1b04636bc3c.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/mbostock/eb0c48375fcdcdc00c54a92724733d0d">Tile by Bounding Box
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/eb0c48375fcdcdc00c54a92724733d0d/thumbnail.png"></a>
+      <a href="http://bl.ocks.org/curran/20827d0f55d8b474bcfe5e1a2c06f0d8">Tile by Bounding Box
+      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/20827d0f55d8b474bcfe5e1a2c06f0d8/thumbnail.png"></a>
     </td>
   </tr>
   <tr>
@@ -37,12 +37,12 @@ A layout for working with image-based map tiles. This can be used to create a si
       <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/96823ad84b0415536980b1cbf57b1dcc/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/linusmarco/c75b1d8b0e4996c1eb8a7d9d296636e9">Wrapping Example
-      <br><img width="230" height="120" src="http://bl.ocks.org/linusmarco/raw/c75b1d8b0e4996c1eb8a7d9d296636e9/thumbnail.png"></a>
+      <a href="http://bl.ocks.org/curran/1c17b0b923d52c0a573d5be3132489c2">d3-tile wrapping
+      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/1c17b0b923d52c0a573d5be3132489c2/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/linusmarco/71f80d7c8a53981f5bbfab8167f32a10">Dynamic tileSize Example
-      <br><img width="230" height="120" src="http://bl.ocks.org/linusmarco/raw/71f80d7c8a53981f5bbfab8167f32a10/thumbnail.png"></a>
+      <a href="http://bl.ocks.org/curran/67cd5dc86eb259690c6848697e04e551">d3-tile tileSize
+      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/67cd5dc86eb259690c6848697e04e551/thumbnail.png"></a>
     </td>
   </tr>
 </table>
