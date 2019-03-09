@@ -5,44 +5,44 @@ A layout for working with image-based map tiles. This can be used to create a si
 <table>
   <tr>
     <td>
-      <a href="http://bl.ocks.org/curran/6df9bb477f8d93e3de2855980f70ace3">Raster & Vector I
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/6df9bb477f8d93e3de2855980f70ace3/thumbnail.png"></a>
+      <a href="https://bl.ocks.org/curran/6df9bb477f8d93e3de2855980f70ace3">Raster & Vector I
+      <br><img width="230" height="120" src="https://bl.ocks.org/curran/raw/6df9bb477f8d93e3de2855980f70ace3/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/curran/d0a49f5ef93acd8f220d505d186a6172">Raster & Vector II
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/d0a49f5ef93acd8f220d505d186a6172/thumbnail.png"></a>
+      <a href="https://bl.ocks.org/curran/d0a49f5ef93acd8f220d505d186a6172">Raster & Vector II
+      <br><img width="230" height="120" src="https://bl.ocks.org/curran/raw/d0a49f5ef93acd8f220d505d186a6172/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/curran/7f355dc5f8d4722c01b40f0566d5b4c3">Raster & Vector III
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/7f355dc5f8d4722c01b40f0566d5b4c3/thumbnail.png"></a>
+      <a href="https://bl.ocks.org/curran/7f355dc5f8d4722c01b40f0566d5b4c3">Raster & Vector III
+      <br><img width="230" height="120" src="https://bl.ocks.org/curran/raw/7f355dc5f8d4722c01b40f0566d5b4c3/thumbnail.png"></a>
     </td>
   </tr>
   <tr>
     <td>
-      <a href="http://bl.ocks.org/curran/ba11b173edcf17020cd076eaddbe1654">Raster & Vector IV
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/ba11b173edcf17020cd076eaddbe1654/thumbnail.png"></a>
+      <a href="https://bl.ocks.org/curran/ba11b173edcf17020cd076eaddbe1654">Raster & Vector IV
+      <br><img width="230" height="120" src="https://bl.ocks.org/curran/raw/ba11b173edcf17020cd076eaddbe1654/thumbnail.png"></a>
     </td>
     <td>
       <a href="https://observablehq.com/@mbostock/d3-vector-tiles">D3 Vector Tiles
       <br><img width="230" height="120" src="https://user-images.githubusercontent.com/68416/54068670-50759200-4275-11e9-9a7a-c1b04636bc3c.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/curran/20827d0f55d8b474bcfe5e1a2c06f0d8">Tile by Bounding Box
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/20827d0f55d8b474bcfe5e1a2c06f0d8/thumbnail.png"></a>
+      <a href="https://bl.ocks.org/curran/20827d0f55d8b474bcfe5e1a2c06f0d8">Tile by Bounding Box
+      <br><img width="230" height="120" src="https://bl.ocks.org/curran/raw/20827d0f55d8b474bcfe5e1a2c06f0d8/thumbnail.png"></a>
     </td>
   </tr>
   <tr>
     <td>
-      <a href="http://bl.ocks.org/curran/96823ad84b0415536980b1cbf57b1dcc">Cross Country Trip
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/96823ad84b0415536980b1cbf57b1dcc/thumbnail.png"></a>
+      <a href="https://bl.ocks.org/curran/96823ad84b0415536980b1cbf57b1dcc">Cross Country Trip
+      <br><img width="230" height="120" src="https://bl.ocks.org/curran/raw/96823ad84b0415536980b1cbf57b1dcc/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/curran/1c17b0b923d52c0a573d5be3132489c2">d3-tile wrapping
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/1c17b0b923d52c0a573d5be3132489c2/thumbnail.png"></a>
+      <a href="https://bl.ocks.org/curran/1c17b0b923d52c0a573d5be3132489c2">d3-tile wrapping
+      <br><img width="230" height="120" src="https://bl.ocks.org/curran/raw/1c17b0b923d52c0a573d5be3132489c2/thumbnail.png"></a>
     </td>
     <td>
-      <a href="http://bl.ocks.org/curran/67cd5dc86eb259690c6848697e04e551">d3-tile tileSize
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/67cd5dc86eb259690c6848697e04e551/thumbnail.png"></a>
+      <a href="https://bl.ocks.org/curran/67cd5dc86eb259690c6848697e04e551">d3-tile tileSize
+      <br><img width="230" height="120" src="https://bl.ocks.org/curran/raw/67cd5dc86eb259690c6848697e04e551/thumbnail.png"></a>
     </td>
   </tr>
 </table>
@@ -115,7 +115,7 @@ Computes the set of quadtree tiles to display given the current layout [extent](
  * `tx` The X translate to be applied to the tile. This is the `x` value multiplied by [tileSize](#tile_tileSize), but without wrapping logic applied.
  * `ty` The Y translate to be applied to the tile. This is the `y` value multiplied by [tileSize](#tile_tileSize).
 
-The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to the group of tile images. For example usage, see [Raster & Vector III](http://bl.ocks.org/mbostock/5914438).
+The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to the group of tile images. For example usage, see [Raster & Vector III](https://bl.ocks.org/curran/1c17b0b923d52c0a573d5be3132489c2).
 
 <a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>])
 
@@ -137,12 +137,12 @@ If *translate* is specified, sets this tile layout’s translate to the specifie
 
 If *wrap* is specified, sets this tile layout’s wrapping option to the specified boolean value and returns this tile layout. If *wrap* is not specified, returns the current wrapping option, which defaults to *true*.
 
-[![image](https://cloud.githubusercontent.com/assets/68416/16513800/0c158872-3f85-11e6-84c6-e481b7e0af5d.png)](http://bl.ocks.org/linusmarco/c75b1d8b0e4996c1eb8a7d9d296636e9)
+[![image](https://cloud.githubusercontent.com/assets/68416/16513800/0c158872-3f85-11e6-84c6-e481b7e0af5d.png)](https://bl.ocks.org/curran/1c17b0b923d52c0a573d5be3132489c2)
 <p align="center"><b>wrap</b>(<i>true</i>)</p>
 
 If *wrap* is *true*, wrapping logic will be applied to tile address *x* values when the layout is evaluated. This will cause map tiles to be displayed in a periodic manner, going beyond longitude values between -180 and 180.
 
-[![image](https://cloud.githubusercontent.com/assets/68416/16513812/2644b43e-3f85-11e6-83fc-a34a37c852ab.png)](http://bl.ocks.org/linusmarco/c75b1d8b0e4996c1eb8a7d9d296636e9)
+[![image](https://cloud.githubusercontent.com/assets/68416/16513812/2644b43e-3f85-11e6-83fc-a34a37c852ab.png)](https://bl.ocks.org/curran/1c17b0b923d52c0a573d5be3132489c2)
 <p align="center"><b>wrap</b>(<i>false</i>)</p>
 
 If *wrap* is *false*, wrapping logic will be disabled, limiting tiles to be within longitude values between -180 and 180.
