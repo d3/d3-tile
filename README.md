@@ -93,11 +93,9 @@ var tile = d3.tile();
 </script>
 ```
 
-[Try d3-tile in your browser.](https://tonicdev.com/npm/d3-tile)
-
 ## API Reference
 
-<a href="#tile" name="tile">#</a> d3.<b>tile</b>()
+<a href="#tile" name="tile">#</a> d3.<b>tile</b>() · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/collection/@d3/d3-tile)
 
 Constructs a layout for determining which quadtree tiles to display in a rectangular viewport.
 
