@@ -996,6 +996,11 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
+tape-await@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/tape-await/-/tape-await-0.1.2.tgz#41f99110a2bc4728732d8bc058278b2fbf3c0bec"
+  integrity sha512-Gt1bXilp9uRTVj+DecLDs37tP1XwGXfFzWVqQEfW7foO9TNacy+aN5TdT0Kv6LI5t/9l3iOE4nX2hr2SQ4+OSg==
+
 tape@4:
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/tape/-/tape-4.11.0.tgz#63d41accd95e45a23a874473051c57fdbc58edc1"

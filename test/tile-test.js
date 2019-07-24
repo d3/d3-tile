@@ -1,4 +1,4 @@
-var tape = require("tape"),
+var tape = require("tape-await"),
     d3 = require("../");
 
 function tile(x, y, z, tx, ty) {
@@ -11,7 +11,7 @@ function tile(x, y, z, tx, ty) {
   };
 }
 
-tape("tile", function(test) {
+tape("tile", test => {
   var width = 960,
       height = 500,
       tileLayout = d3.tile()
@@ -44,11 +44,9 @@ tape("tile", function(test) {
   test.deepEqual(tiles[12], tile(3, 7, 4, 3 * 256, 7 * 256));
   test.deepEqual(tiles[13], tile(4, 7, 4, 4 * 256, 7 * 256));
   test.deepEqual(tiles[14], tile(5, 7, 4, 5 * 256, 7 * 256));
-
-  test.end();
 });
 
-tape("size and extent", function(test) {
+tape("size and extent", test => {
   var tileLayout = d3.tile();
   test.deepEqual(tileLayout.size(), [960, 500]);
   test.deepEqual(tileLayout.extent(), [[0, 0], [960, 500]]);
@@ -60,11 +58,9 @@ tape("size and extent", function(test) {
   tileLayout.extent([[100, 200], [300, 350]]);
   test.deepEqual(tileLayout.size(), [200, 150]);
   test.deepEqual(tileLayout.extent(), [[100, 200], [300, 350]]);
-
-  test.end();
 });
 
-tape("wrap", function(test) {
+tape("wrap", test => {
   var tileLayout = d3.tile()
         .scale(1 << 8)
         .translate([480, 250]),
@@ -79,10 +75,9 @@ tape("wrap", function(test) {
   test.deepEqual(tiles[3], tile(0, 0, 0, 1 * 256, 0));
   test.deepEqual(tiles[4], tile(0, 0, 0, 2 * 256, 0));
 
-  test.end();
 });
 
-tape("tileSize", function(test) {
+tape("tileSize", test => {
   var tileLayout256 = d3.tile()
         .scale(1 << 8)
         .translate([480, 250]),
@@ -109,6 +104,4 @@ tape("tileSize", function(test) {
   test.deepEqual(tiles512[0], tile(0, 0, 0, -1 * 512, 0));
   test.deepEqual(tiles512[1], tile(0, 0, 0, 0 * 512, 0));
   test.deepEqual(tiles512[2], tile(0, 0, 0, 1 * 512, 0));
-
-  test.end();
 });
