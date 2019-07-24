@@ -1,5 +1,5 @@
-var tape = require("tape-await"),
-    d3 = require("../");
+import tape from "tape-await";
+import {tile as Tile} from "../src/index.js";
 
 function tile(x, y, z, tx, ty) {
   return {
@@ -14,7 +14,7 @@ function tile(x, y, z, tx, ty) {
 tape("tile", test => {
   var width = 960,
       height = 500,
-      tileLayout = d3.tile()
+      tileLayout = Tile()
         .size([width, height])
         .scale(4096)
         .translate([1617, 747]),
@@ -47,7 +47,7 @@ tape("tile", test => {
 });
 
 tape("size and extent", test => {
-  var tileLayout = d3.tile();
+  var tileLayout = Tile();
   test.deepEqual(tileLayout.size(), [960, 500]);
   test.deepEqual(tileLayout.extent(), [[0, 0], [960, 500]]);
 
@@ -61,7 +61,7 @@ tape("size and extent", test => {
 });
 
 tape("wrap", test => {
-  var tileLayout = d3.tile()
+  var tileLayout = Tile()
         .scale(1 << 8)
         .translate([480, 250]),
       tiles = tileLayout();
@@ -78,7 +78,7 @@ tape("wrap", test => {
 });
 
 tape("tileSize", test => {
-  var tileLayout256 = d3.tile()
+  var tileLayout256 = Tile()
         .scale(1 << 8)
         .translate([480, 250]),
       tiles256 = tileLayout256();
@@ -92,7 +92,7 @@ tape("tileSize", test => {
   test.deepEqual(tiles256[3], tile(0, 0, 0, 1 * 256, 0));
   test.deepEqual(tiles256[4], tile(0, 0, 0, 2 * 256, 0));
 
-  var tileLayout512 = d3.tile()
+  var tileLayout512 = Tile()
         .tileSize(512)
         .scale(1 << 8)
         .translate([480, 250]),

@@ -304,6 +304,11 @@ eslint@6:
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
 
+esm@^3.2.25:
+  version "3.2.25"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+  integrity sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
+
 espree@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/espree/-/espree-6.0.0.tgz#716fc1f5a245ef5b9a7fdb1d7b0d3f02322e75f6"
@@ -996,7 +1001,7 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-tape-await@^0.1.2:
+tape-await@0.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/tape-await/-/tape-await-0.1.2.tgz#41f99110a2bc4728732d8bc058278b2fbf3c0bec"
   integrity sha512-Gt1bXilp9uRTVj+DecLDs37tP1XwGXfFzWVqQEfW7foO9TNacy+aN5TdT0Kv6LI5t/9l3iOE4nX2hr2SQ4+OSg==
