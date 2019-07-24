@@ -12,27 +12,30 @@
     "name": "Mike Bostock",
     "url": "http://bost.ocks.org/mike"
   },
-  "main": "build/d3-tile.js",
-  "module": "index",
-  "jsnext:main": "index",
+  "main": "dist/d3-tile.js",
+  "unpkg": "dist/d3-tile.min.js",
+  "module": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/d3/d3-tile.git"
   },
+  "files": [
+    "dist/**/*.js",
+    "src/**/*.js"
+  ],
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -g d3-array:d3 -f umd -n d3 -o build/d3-tile.js -- index.js",
-    "test": "tape 'test/**/*-test.js' && eslint index.js src",
-    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-tile.js -c -m -o build/d3-tile.min.js",
-    "postpublish": "git push && git push --tags"
+    "pretest": "rollup -c",
+    "test": "tape 'test/**/*-test.js' && eslint src",
+    "prepublishOnly": "rm -rf dist && yarn test",
+    "postpublish": "git push && git push --tags && zip -j dist/${npm_package_name}.zip -- LICENSE README.md dist/${npm_package_name}.js dist/${npm_package_name}.min.js"
   },
   "dependencies": {
-    "d3-array": "1"
+    "d3-array": "1 || 2"
   },
   "devDependencies": {
-    "eslint": "2",
-    "package-preamble": "0.0",
-    "rollup": "0.31",
-    "tape": "4",
-    "uglify-js": "2"
+    "eslint": "6",
+    "rollup": "1",
+    "rollup-plugin-terser": "5",
+    "tape": "4"
   }
 }
