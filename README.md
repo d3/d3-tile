@@ -65,17 +65,17 @@ function translate(transform) {
 
 This default is compatible with a [d3-zoom transform](https://github.com/d3/d3-zoom/blob/master/README.md#zoom-transforms).
 
-<a href="#tile_clampX" name="tile_clampX">#</a> <i>tile</i>.<b>clampX</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
+<a href="#tile_clampX" name="tile_clampX">#</a> <i>tile</i>.<b>clampX</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/@d3/wrapped-tiles)
 
-…
+If *clamp* is specified, sets whether or not the visible tiles will be clamped in the *x*-coordinate and returns this tile layout. If *clamp* is not specified, returns the current *x*-clamp, which defaults to true. If the *x*-clamp is false, then the tile layout will return tiles that are outside the “world” tile [0, 0, 0], with *x*-coordinates that are outside the normal bounds 0 ≤ *x* < 2^*z*. See [d3.tileWrap](#tileWrap) for converting these coordinates to wrapped in-world coordinates. See [Wrapped Tiles](https://observablehq.com/@d3/wrapped-tiles) for example.
 
 <a href="#tile_clampY" name="tile_clampY">#</a> <i>tile</i>.<b>clampY</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-…
+If *clamp* is specified, sets whether or not the visible tiles will be clamped in the *y*-coordinate and returns this tile layout. If *clamp* is not specified, returns the current *y*-clamp, which defaults to true. If the *y*-clamp is false, then the tile layout will return tiles that are outside the “world” tile [0, 0, 0], with *y*-coordinates that are outside the normal bounds 0 ≤ *y* < 2^*z*. See [d3.tileWrap](#tileWrap) for converting these coordinates to wrapped in-world coordinates. See also [*tile*.clampX](#tile_clampX).
 
 <a href="#tile_clamp" name="tile_clamp">#</a> <i>tile</i>.<b>clamp</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-…
+If *clamp* is specified, sets [*tile*.clampX](#tile_clampX) and [*tile*.clampY](#tile_clampY) to the specified boolean *clamp* and returns this tile layout. If *clamp* is not specified, returns true if *tile*.clampX and *tile*.clampY are both true, and false otherwise.
 
 <a href="#tile_tileSize" name="tile_tileSize">#</a> <i>tile</i>.<b>tileSize</b>([<i>tileSize</i>])
 
@@ -90,5 +90,6 @@ If *zoomDelta* is specified, sets this tile layout’s zoom offset to the specif
 Given *tile* coordinates [*x*, *y*, *z*], where *x* and *y* may be outside the “world”, returns the wrapped tile coordinates [*x′*, *y′*, *z*] where *j* = 2 ^ *z*, *x′* = *x* - ⌊*x* / *j*⌋ * *j* and *y′* = *y* - ⌊*y* / *j*⌋ * *j*. This function is most commonly used in conjunction with [*tile*.clampX](#tile_clampX) to allow horizontal wrapping of web Mercator tiles. See [Wrapped Tiles](https://observablehq.com/@d3/wrapped-tiles) for example.
 
 ```js
-d3.tileWrap([-1, 2, 1])
+d3.tileWrap([-1, 0, 1]) // [1, 0, 1]
+d3.tileWrap([-1, 0, 2]) // [3, 0, 2]
 ````
