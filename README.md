@@ -149,7 +149,7 @@ If *tileSize* is specified, sets this tile layout’s tile width and height to t
 const tile = d3.tile().tileSize(512);
 ```
 
-<a href="#tile_zoomDelta" name="tile_zoomDelta">#</a> <i>tile</i>.<b>zoomDelta</b>([<i>zoomDelta</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
+<a href="#tile_zoomDelta" name="tile_zoomDelta">#</a> <i>tile</i>.<b>zoomDelta</b>([<i>zoomDelta</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/@d3/tile-zoomdelta)
 
 If *zoomDelta* is specified, sets this tile layout’s zoom offset to the specified number *zoomDelta* and returns this tile layout. If *zoomDelta* is not specified, returns the current zoom offset, which defaults to 0. The zoom offset affects which *z*-coordinate is chosen based on the current [scale](#tile_scale); the default zoom offset of 0 which choose the *z* that is closest the displayed size; a zoom offset of -1 will use *z* - 1, giving tiles that are twice as big (lower resolution); a zoom offset of +1 will use *z* + 1, giving tiles that are twice as small (higher resolution). The latter might be appropriate for showing 256×256 tiles in a 128×128 space on a high-resolution screen.
 
