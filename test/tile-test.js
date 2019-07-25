@@ -9,7 +9,8 @@ tape("d3.tile() has the expected defaults", test => {
   test.deepEqual(tile.translate(), [480, 250]);
   test.deepEqual(tile.zoomDelta(), 0);
   test.deepEqual(tile.tileSize(), 256);
-  test.deepEqual(tile.filter(), d3.tileFilterXY);
+  test.deepEqual(tile.clampX(), true);
+  test.deepEqual(tile.clampY(), true);
   test.deepEqual(tile(), Object.assign([
     [0,  0, 0]
   ], {
@@ -85,9 +86,34 @@ tape("tile.tileSize(…) coerces the input to numbers", test => {
   test.strictEqual(tile.tileSize(), 512);
 });
 
-tape("tile.filter(…) sets the tile filter", test => {
-  const tile = d3.tile().filter(null);
-  test.deepEqual(tile.filter(), null);
+tape("tile.clampX(…) sets the x-clampt", test => {
+  const tile = d3.tile().clampX(false);
+  test.deepEqual(tile.clampX(), false);
+  test.deepEqual(tile(), Object.assign([
+    [-2,  0, 0], [-1,  0, 0], [0,  0, 0], [+1,  0, 0], [+2,  0, 0],
+  ], {
+    translate: [1.375, 0.4765625],
+    scale: 256
+  }));
+});
+
+tape("tile.clampY(…) sets the y-clampt", test => {
+  const tile = d3.tile().clampY(false);
+  test.deepEqual(tile.clampY(), false);
+  test.deepEqual(tile(), Object.assign([
+    [0, -1, 0],
+    [0,  0, 0],
+    [0, +1, 0]
+  ], {
+    translate: [1.375, 0.4765625],
+    scale: 256
+  }));
+});
+
+tape("tile.clamp(…) disables both clamps", test => {
+  const tile = d3.tile().clamp(false);
+  test.deepEqual(tile.clampX(), false);
+  test.deepEqual(tile.clampY(), false);
   test.deepEqual(tile(), Object.assign([
     [-2, -1, 0], [-1, -1, 0], [0, -1, 0], [+1, -1, 0], [+2, -1, 0],
     [-2,  0, 0], [-1,  0, 0], [0,  0, 0], [+1,  0, 0], [+2,  0, 0],

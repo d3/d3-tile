@@ -1,5 +1,3 @@
-import {tileFilterXY, tileFilterNone} from "./filter.js";
-
 export default function() {
   let x0 = 0;
   let y0 = 0;
@@ -10,7 +8,8 @@ export default function() {
   let tileSize = 256;
   let scale = 256;
   let zoomDelta = 0;
-  let filter = tileFilterXY;
+  let clampX = true;
+  let clampY = true;
 
   function tile() {
     const z = Math.max(Math.log2(scale / tileSize), 0);
@@ -18,16 +17,15 @@ export default function() {
     const k = Math.pow(2, z - z0) * tileSize;
     const x = tx - scale / 2;
     const y = ty - scale / 2;
-    const xmin = Math.floor((x0 - x) / k);
-    const xmax = Math.ceil((x1 - x) / k);
-    const ymin = Math.floor((y0 - y) / k);
-    const ymax = Math.ceil((y1 - y) / k);
+    const j = 1 << z0;
+    const xmin = Math.max(clampX ? 0 : -Infinity, Math.floor((x0 - x) / k));
+    const xmax = Math.min(clampX ? j : Infinity, Math.ceil((x1 - x) / k));
+    const ymin = Math.max(clampY ? 0 : -Infinity, Math.floor((y0 - y) / k));
+    const ymax = Math.min(clampY ? j : Infinity, Math.ceil((y1 - y) / k));
     const tiles = [];
     for (let y = ymin; y < ymax; ++y) {
       for (let x = xmin; x < xmax; ++x) {
-        if (filter(x, y, z0)) {
-          tiles.push([x, y, z0]);
-        }
+        tiles.push([x, y, z0]);
       }
     }
     tiles.translate = [x / k, y / k];
@@ -59,8 +57,16 @@ export default function() {
     return arguments.length ? (tileSize = +_, tile) : tileSize;
   };
 
-  tile.filter = function(_) {
-    return arguments.length ? (filter = _ == null ? tileFilterNone : filter, tile) : filter === tileFilterNone ? null : filter;
+  tile.clamp = function(_) {
+    return arguments.length ? (clampX = clampY = !!_, tile) : clampX && clampY;
+  };
+
+  tile.clampX = function(_) {
+    return arguments.length ? (clampX = !!_, tile) : clampX;
+  };
+
+  tile.clampY = function(_) {
+    return arguments.length ? (clampY = !!_, tile) : clampY;
   };
 
   return tile;
