@@ -1,15 +1,10 @@
 export default function() {
-  let x0 = 0;
-  let y0 = 0;
-  let x1 = 960;
-  let y1 = 500;
-  let tx = (x0 + x1) / 2;
-  let ty = (y0 + y1) / 2;
+  let x0 = 0, y0 = 0, x1 = 960, y1 = 500;
+  let tx = (x0 + x1) / 2, ty = (y0 + y1) / 2;
+  let clampX = true, clampY = true;
   let tileSize = 256;
   let scale = 256;
   let zoomDelta = 0;
-  let clampX = true;
-  let clampY = true;
 
   function tile() {
     const z = Math.log2(scale / tileSize);
