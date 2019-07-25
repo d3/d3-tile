@@ -32,7 +32,7 @@ Computes the set of tiles to display given the current settings, computing the [
 
 <a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-If *extent* is specified, sets this tile layout’s viewport extent to the specified array of points [[*x0*, *y0*], [*x1*, *y1*]], where [*x0*, *y0*] is the top-left corner and [*x1*, *y1*] is the bottom-right corner, and returns this tile layout. If *extent* is not specified, returns the current viewport extent, which defaults to [[0, 0], [960, 500]]. Setting the viewport extent implicitly sets the [viewport size](#tile_size).
+If *extent* is specified, sets this tile layout’s viewport extent to the specified array [[*x0*, *y0*], [*x1*, *y1*]], where [*x0*, *y0*] is the top-left corner and [*x1*, *y1*] is the bottom-right corner, and returns this tile layout. If *extent* is not specified, returns the current viewport extent, which defaults to [[0, 0], [960, 500]]. Setting the viewport extent implicitly sets the [viewport size](#tile_size).
 
 <a href="#tile_size" name="tile_size">#</a> <i>tile</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
@@ -78,11 +78,11 @@ If *clamp* is specified, sets whether or not the visible tiles will be clamped i
 
 If *clamp* is specified, sets [*tile*.clampX](#tile_clampX) and [*tile*.clampY](#tile_clampY) to the specified boolean *clamp* and returns this tile layout. If *clamp* is not specified, returns true if *tile*.clampX and *tile*.clampY are both true, and false otherwise.
 
-<a href="#tile_tileSize" name="tile_tileSize">#</a> <i>tile</i>.<b>tileSize</b>([<i>tileSize</i>])
+<a href="#tile_tileSize" name="tile_tileSize">#</a> <i>tile</i>.<b>tileSize</b>([<i>tileSize</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
 If *tileSize* is specified, sets this tile layout’s tile width and height to the specified number *tileSize* and returns this tile layout. If *tileSize* is not specified, returns the current layout tile size, which defaults to 256. 256×256 is the most common tile size among tile providers.
 
-<a href="#tile_zoomDelta" name="tile_zoomDelta">#</a> <i>tile</i>.<b>zoomDelta</b>([<i>zoomDelta</i>])
+<a href="#tile_zoomDelta" name="tile_zoomDelta">#</a> <i>tile</i>.<b>zoomDelta</b>([<i>zoomDelta</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
 If *zoomDelta* is specified, sets this tile layout’s zoom offset to the specified number *zoomDelta* and returns this tile layout. If *zoomDelta* is not specified, returns the current zoom offset, which defaults to 0. The zoom offset affects which *z*-coordinate is chosen based on the current [scale](#tile_scale); the default zoom offset of 0 which choose the *z* that is closest the displayed size; a zoom offset of -1 will use *z* - 1, giving tiles that are twice as big (lower resolution); a zoom offset of +1 will use *z* + 1, giving tiles that are twice as small (higher resolution). The latter might be appropriate for showing 256×256 tiles in a 128×128 space on a high-resolution screen.
 
