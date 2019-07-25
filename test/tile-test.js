@@ -83,7 +83,6 @@ tape("tile.tileSize(…) sets the tile size", test => {
 tape("tile.tileSize(…) coerces the input to numbers", test => {
   const tile = d3.tile().tileSize(" 512 ");
   test.strictEqual(tile.tileSize(), 512);
-
 });
 
 tape("tile.filter(…) sets the tile filter", test => {
