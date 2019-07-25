@@ -1,94 +1,16 @@
 # d3-tile
 
-A layout for working with image-based map tiles. This can be used to create a simple slippy map, or to render standard map tiles (*e.g.*, Mapbox, Mapzen, CloudMade, Bing) as a base layer behind a vector layer.
-
-<table>
-  <tr>
-    <td>
-      <a href="http://bl.ocks.org/mbostock/94b9fd26e12c586f342d">Raster & Vector I
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/94b9fd26e12c586f342d/thumbnail.png"></a>
-    </td>
-    <td>
-      <a href="http://bl.ocks.org/mbostock/5342063">Raster & Vector II
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/5342063/thumbnail.png"></a>
-    </td>
-    <td>
-      <a href="http://bl.ocks.org/mbostock/5914438">Raster & Vector III
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/5914438/thumbnail.png"></a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="http://bl.ocks.org/mbostock/9535021">Raster & Vector IV
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/9535021/thumbnail.png"></a>
-    </td>
-    <td>
-      <a href="http://bl.ocks.org/mbostock/5593150">Vector Tiles
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/5593150/thumbnail.png"></a>
-    </td>
-    <td>
-      <a href="http://bl.ocks.org/mbostock/eb0c48375fcdcdc00c54a92724733d0d">Tile by Bounding Box
-      <br><img width="230" height="120" src="http://bl.ocks.org/mbostock/raw/eb0c48375fcdcdc00c54a92724733d0d/thumbnail.png"></a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="http://bl.ocks.org/curran/96823ad84b0415536980b1cbf57b1dcc">Cross Country Trip
-      <br><img width="230" height="120" src="http://bl.ocks.org/curran/raw/96823ad84b0415536980b1cbf57b1dcc/thumbnail.png"></a>
-    </td>
-    <td>
-      <a href="http://bl.ocks.org/linusmarco/c75b1d8b0e4996c1eb8a7d9d296636e9">Wrapping Example
-      <br><img width="230" height="120" src="http://bl.ocks.org/linusmarco/raw/c75b1d8b0e4996c1eb8a7d9d296636e9/thumbnail.png"></a>
-    </td>
-    <td>
-      <a href="http://bl.ocks.org/linusmarco/71f80d7c8a53981f5bbfab8167f32a10">Dynamic tileSize Example
-      <br><img width="230" height="120" src="http://bl.ocks.org/linusmarco/raw/71f80d7c8a53981f5bbfab8167f32a10/thumbnail.png"></a>
-    </td>
-  </tr>
-</table>
-
-## Note on Migrating From v0.0.3 to v0.0.4
-Previously in `v0.0.3` of `d3-tile`, the following: 
-
-```js
-var tile = d3.tile();
-tile();
-``` 
-
-Returned a two dimensional array data structure, where each the index of each inner array corresponded to `z`, `x`, and `y`:
-
-```js
-[
-  [273, 376, 10],
-  [274, 376, 10],
-  [275, 376, 10],
-  // etc...
-]
-```
-
-In the `v0.0.4` of `d3-tile`, the data structured has become:
-
-```js
-[
-  {x: 273, y: 376, z: 10, tx: 69888, ty: 96256},
-  {x: 274, y: 376, z: 10, tx: 70144, ty: 96256},
-  {x: 275, y: 376, z: 10, tx: 70400, ty: 96256},
-  // etc...
-]
-```
-
-As a result, the examples listed above will need to be modified if using a version of `d3-tile` > `v0.0.3`.
+Quadtree tiles are common for representing large, multi-resolution geometry and images, as in “slippy” maps. d3.tile provides a convenient mechanism for computing which tile coordinates should be visible in the current viewport. Unlike dedicated libraries for slippy maps, such as [Leaflet](https://leafletjs.com/), d3.tile’s tiny, low-level API is agnostic about how the tiles are presented and offers greater flexibility. d3.tile works well with [d3-geo](https://github.com/d3/d3-geo) for geographic maps and [d3-zoom](https://github.com/d3/d3-zoom) for interaction.
 
 ## Installing
 
-If you use NPM, `npm install d3-tile`. Otherwise, download the [latest release](https://github.com/d3/d3-tile/releases/latest). You can also load directly from [unpkg.com](https://unpkg.com) as a [standalone library](https://unpkg.com/d3-tile@0.0). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
+If you use NPM, `npm install d3-tile`. Otherwise, download the [latest release](https://github.com/d3/d3-tile/releases/latest). You can also load directly as a [standalone library](https://cdn.jsdelivr.net/npm/d3-tile). ES modules, AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
 
 ```html
-<script src="https://unpkg.com/d3-array@1.0"></script>
-<script src="https://unpkg.com/d3-tile@0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-tile@1"></script>
 <script>
 
-var tile = d3.tile();
+const tile = d3.tile();
 
 </script>
 ```
@@ -97,62 +19,76 @@ var tile = d3.tile();
 
 <a href="#tile" name="tile">#</a> d3.<b>tile</b>() · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/collection/@d3/d3-tile)
 
-Constructs a layout for determining which quadtree tiles to display in a rectangular viewport.
+Constructs a new tile layout with the default settings.
 
 ```js
-var tile = d3.tile();
+const tile = d3.tile();
 ```
 
-<a href="#_tile" name="_tile">#</a> <i>tile</i>()
+<a href="#_tile" name="_tile">#</a> <i>tile</i>([…*arguments*]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/@d3/raster-tiles)
 
-Computes the set of quadtree tiles to display given the current layout [extent](#tile_extent), [scale](#tile_scale), [translate](#tile_translate) and [tileSize](#tile_tileSize). Returns an array of objects with the following properties:
+Computes the set of tiles to display given the current settings, computing the [scale](#tile_scale) and [translate](#tile_translate) by invoking the corresponding accessors with the given *arguments*. Returns an array of [*x*, *y*, *z*] arrays representing the *x*- (horizontal), *y*- (vertical) and *z*-coordinates (zoom) of the visible tiles. The returned array also has array.*scale* and array.*translate* properties which together with a tile’s *x* and *y* determine the location of the tile in the viewport. See [Raster Tiles](https://observablehq.com/@d3/raster-tiles) for an example.
 
- * `x` The integer X coordinate of the tile address. Periodic if [wrap](#tile_wrap) is set to *true*.
- * `y` The integer Y coordinate of the tile address.
- * `z` The integer Z coordinate of the tile address (zoom level).
- * `tx` The X translate to be applied to the tile. This is the `x` value multiplied by [tileSize](#tile_tileSize), but without wrapping logic applied.
- * `ty` The Y translate to be applied to the tile. This is the `y` value multiplied by [tileSize](#tile_tileSize).
+<a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-The returned array also has properties `scale` and `translate` that can be used to apply the correct transformation to the group of tile images. For example usage, see [Raster & Vector III](http://bl.ocks.org/mbostock/5914438).
+If *extent* is specified, sets this tile layout’s viewport extent to the specified array of points [[*x0*, *y0*], [*x1*, *y1*]], where [*x0*, *y0*] is the top-left corner and [*x1*, *y1*] is the bottom-right corner, and returns this tile layout. If *extent* is not specified, returns the current viewport extent, which defaults to [[0, 0], [960, 500]]. Setting the viewport extent implicitly sets the [viewport size](#tile_size).
 
-<a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>])
+<a href="#tile_size" name="tile_size">#</a> <i>tile</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-If *extent* is specified, sets this tile layout’s extent to the specified array of points [[*x0*, *y0*], [*x1*, *y1*]], where [*x0*, *y0*] is the top-left corner and [*x1*, *y1*] is the bottom-right corner, and returns this tile layout. If *extent* is not specified, returns the current layout extent.
+If *size* is specified, sets this tile layout’s viewport size to the specified array of numbers [*width*, *height*] and returns this tile layout. If *size* is not specified, returns the current viewport size, which defaults to [960, 500]. This is a convenience method for setting the [viewport extent](#tile_extent) to [[0, 0], [*width*, *height*]].
 
-<a href="#tile_size" name="tile_size">#</a> <i>tile</i>.<b>size</b>([<i>size</i>])
+<a href="#tile_scale" name="tile_scale">#</a> <i>tile</i>.<b>scale</b>([<i>scale</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-If *size* is specified, sets this tile layout’s size to the specified two-element array of numbers [*width*, *height*] and returns this tile layout. If *size* is not specified, returns the current layout size. This is a convenience method equivalent to setting the [extent](#tile_extent) to [[0, 0], [*width*, *height*]].
+If *scale* is specified, sets this tile layout’s scale function and returns this tile layout. If *scale* is a function, it is invoked when the [tile layout](#_tile) is invoked, being passed the same arguments as the tile layout; this function must return a number indicating the desired width and height of the world tile [0, 0, 0]. If *scale* is not a function, it assumed to be a constant number, and is wrapped in a function which returns the specified number.
 
-<a href="#tile_scale" name="tile_scale">#</a> <i>tile</i>.<b>scale</b>([<i>scale</i>])
+If *scale* is not specified, returns the current layout scale function, which defaults to:
 
-If *scale* is specified, sets this tile layout’s scale to the specified number *scale* and returns this tile layout. If *scale* is not specified, returns the current layout scale.
+```js
+function scale(transform) {
+  return transform.k;
+}
+```
 
-<a href="#tile_translate" name="tile_translate">#</a> <i>tile</i>.<b>translate</b>([<i>translate</i>])
+This default is compatible with a [d3-zoom transform](https://github.com/d3/d3-zoom/blob/master/README.md#zoom-transforms).
 
-If *translate* is specified, sets this tile layout’s translate to the specified two-element array of numbers [*x*, *y*] and returns this tile layout. If *translate* is not specified, returns the current layout translate.
+<a href="#tile_translate" name="tile_translate">#</a> <i>tile</i>.<b>translate</b>([<i>translate</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-<a href="#tile_wrap" name="tile_wrap">#</a> <i>tile</i>.<b>wrap</b>([<i>wrap</i>])
+If *translate* is specified, sets this tile layout’s translate function and returns this tile layout. If *translate* is a function, it is invoked when the [tile layout](#_tile) is invoked, being passed the same arguments as the tile layout; this function must return an array of numbers [*x*, *y*] indicating the desired coordinates the center of the world tile [0, 0, 0]. If *translate* is not a function, it is assumed to be a constant array [*x*, *y*] and is wrapped in a function which returns the specified array.
 
-If *wrap* is specified, sets this tile layout’s wrapping option to the specified boolean value and returns this tile layout. If *wrap* is not specified, returns the current wrapping option, which defaults to *true*.
+If *translate* is not specified, returns the current layout translate function, which defaults to:
 
-[![image](https://cloud.githubusercontent.com/assets/68416/16513800/0c158872-3f85-11e6-84c6-e481b7e0af5d.png)](http://bl.ocks.org/linusmarco/c75b1d8b0e4996c1eb8a7d9d296636e9)
-<p align="center"><b>wrap</b>(<i>true</i>)</p>
+```js
+function translate(transform) {
+  return [transform.x, transform.y];
+}
+````
 
-If *wrap* is *true*, wrapping logic will be applied to tile address *x* values when the layout is evaluated. This will cause map tiles to be displayed in a periodic manner, going beyond longitude values between -180 and 180.
+This default is compatible with a [d3-zoom transform](https://github.com/d3/d3-zoom/blob/master/README.md#zoom-transforms).
 
-[![image](https://cloud.githubusercontent.com/assets/68416/16513812/2644b43e-3f85-11e6-83fc-a34a37c852ab.png)](http://bl.ocks.org/linusmarco/c75b1d8b0e4996c1eb8a7d9d296636e9)
-<p align="center"><b>wrap</b>(<i>false</i>)</p>
+<a href="#tile_clampX" name="tile_clampX">#</a> <i>tile</i>.<b>clampX</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-If *wrap* is *false*, wrapping logic will be disabled, limiting tiles to be within longitude values between -180 and 180.
+…
+
+<a href="#tile_clampY" name="tile_clampY">#</a> <i>tile</i>.<b>clampY</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
+
+…
+
+<a href="#tile_clamp" name="tile_clamp">#</a> <i>tile</i>.<b>clamp</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
+
+…
 
 <a href="#tile_tileSize" name="tile_tileSize">#</a> <i>tile</i>.<b>tileSize</b>([<i>tileSize</i>])
 
-If *tileSize* is specified, sets this tile layout’s individual tile widths and heights to the specified number *tileSize* and returns this tile layout. If *tileSize* is not specified, returns the current layout tile size, which defaults to 256, the most common tile size among tile service providers.
+If *tileSize* is specified, sets this tile layout’s tile width and height to the specified number *tileSize* and returns this tile layout. If *tileSize* is not specified, returns the current layout tile size, which defaults to 256. 256×256 is the most common tile size among tile providers.
 
 <a href="#tile_zoomDelta" name="tile_zoomDelta">#</a> <i>tile</i>.<b>zoomDelta</b>([<i>zoomDelta</i>])
 
-If *zoomDelta* is specified, sets this tile layout’s zoom multiplier factor *zoomDelta* and returns this tile layout. If *zoomDelta* is not specified, returns the current zoom multiplier factor, which defaults to 1.
+If *zoomDelta* is specified, sets this tile layout’s zoom offset to the specified number *zoomDelta* and returns this tile layout. If *zoomDelta* is not specified, returns the current zoom offset, which defaults to 0. The zoom offset affects which *z*-coordinate is chosen based on the current [scale](#tile_scale); the default zoom offset of 0 which choose the *z* that is closest the displayed size; a zoom offset of -1 will use *z* - 1, giving tiles that are twice as big (lower resolution); a zoom offset of +1 will use *z* + 1, giving tiles that are twice as small (higher resolution). The latter might be appropriate for showing 256×256 tiles in a 128×128 space on a high-resolution screen.
 
-![image](https://user-images.githubusercontent.com/68416/61864415-03761d80-aeef-11e9-8c03-b772df649f72.png)
+<a href="#tileWrap" name="tileWrap">#</a> d3.<b>tileWrap</b>(*tile*) · [Source](https://github.com/d3/d3-tile/blob/master/src/wrap.js), [Examples](https://observablehq.com/@d3/wrapped-tiles)
 
-You can use *zoomDelta* for showing tiles at different resolution than the screen. For example, if you have a HiDPI screen, you might take 256×256 tiles and display them in a 128×128 space by using `.zoomDelta(2)`.
+Given *tile* coordinates [*x*, *y*, *z*], where *x* and *y* may be outside the “world”, returns the wrapped tile coordinates [*x′*, *y′*, *z*] where *j* = 2 ^ *z*, *x′* = *x* - ⌊*x* / *j*⌋ * *j* and *y′* = *y* - ⌊*y* / *j*⌋ * *j*. This function is most commonly used in conjunction with [*tile*.clampX](#tile_clampX) to allow horizontal wrapping of web Mercator tiles. See [Wrapped Tiles](https://observablehq.com/@d3/wrapped-tiles) for example.
+
+```js
+d3.tileWrap([-1, 2, 1])
+````
