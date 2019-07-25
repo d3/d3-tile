@@ -1,17 +1,33 @@
+function defaultScale(t) {
+  return t.k;
+}
+
+function defaultTranslate(t) {
+  return [t.x, t.y];
+}
+
+function constant(x) {
+  return function() {
+    return x;
+  };
+}
+
 export default function() {
   let x0 = 0, y0 = 0, x1 = 960, y1 = 500;
-  let tx = (x0 + x1) / 2, ty = (y0 + y1) / 2;
   let clampX = true, clampY = true;
   let tileSize = 256;
-  let scale = 256;
+  let scale = defaultScale;
+  let translate = defaultTranslate;
   let zoomDelta = 0;
 
   function tile() {
-    const z = Math.log2(scale / tileSize);
+    const scale_ = +scale.apply(this, arguments);
+    const translate_ = translate.apply(this, arguments);
+    const z = Math.log2(scale_ / tileSize);
     const z0 = Math.round(Math.max(z + zoomDelta, 0));
     const k = Math.pow(2, z - z0) * tileSize;
-    const x = tx - scale / 2;
-    const y = ty - scale / 2;
+    const x = +translate_[0] - scale_ / 2;
+    const y = +translate_[1] - scale_ / 2;
     const xmin = Math.max(clampX ? 0 : -Infinity, Math.floor((x0 - x) / k));
     const xmax = Math.min(clampX ? 1 << z0 : Infinity, Math.ceil((x1 - x) / k));
     const ymin = Math.max(clampY ? 0 : -Infinity, Math.floor((y0 - y) / k));
@@ -36,11 +52,11 @@ export default function() {
   };
 
   tile.scale = function(_) {
-    return arguments.length ? (scale = +_, tile) : scale;
+    return arguments.length ? (scale = typeof _ === "function" ? _ : constant(+_), tile) : scale;
   };
 
   tile.translate = function(_) {
-    return arguments.length ? (tx = +_[0], ty = +_[1], tile) : [tx, ty];
+    return arguments.length ? (translate = typeof _ === "function" ? _ : constant([+_[0], +_[1]]), tile) : translate;
   };
 
   tile.zoomDelta = function(_) {

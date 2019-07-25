@@ -5,13 +5,13 @@ tape("d3.tile() has the expected defaults", test => {
   const tile = d3.tile();
   test.deepEqual(tile.size(), [960, 500]);
   test.deepEqual(tile.extent(), [[0, 0], [960, 500]]);
-  test.deepEqual(tile.scale(), 256);
-  test.deepEqual(tile.translate(), [480, 250]);
+  test.deepEqual(tile.scale()({k: 256}), 256);
+  test.deepEqual(tile.translate()({x: 480, y: 250}), [480, 250]);
   test.deepEqual(tile.zoomDelta(), 0);
   test.deepEqual(tile.tileSize(), 256);
   test.deepEqual(tile.clampX(), true);
   test.deepEqual(tile.clampY(), true);
-  test.deepEqual(tile(), Object.assign([
+  test.deepEqual(tile({k: 256, x: 480, y: 250}), Object.assign([
     [0,  0, 0]
   ], {
     translate: [1.375, 0.4765625],
@@ -28,8 +28,8 @@ tape("tile.size(…) sets the viewport", test => {
 });
 
 tape("tile(…) observes the size", test => {
-  test.deepEqual(d3.tile().scale(256).translate([128, 128]).size([256, 256])(), Object.assign([[0, 0, 0]], {translate: [0, 0], scale: 256}));
-  test.deepEqual(d3.tile().scale(512).translate([128, 128]).size([256, 256])(), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [-0.5, -0.5], scale: 256}));
+  test.deepEqual(d3.tile().size([256, 256])({k: 256, x: 128, y: 128}), Object.assign([[0, 0, 0]], {translate: [0, 0], scale: 256}));
+  test.deepEqual(d3.tile().size([256, 256])({k: 512, x: 128, y: 128}), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [-0.5, -0.5], scale: 256}));
 });
 
 tape("tile.size(…) coerces the input to numbers", test => {
@@ -45,8 +45,8 @@ tape("tile.extent(…) sets the viewport", test => {
 });
 
 tape("tile(…) observes the extent", test => {
-  test.deepEqual(d3.tile().scale(512).translate([256, 256]).extent([[256, 256], [512, 512]])(), Object.assign([[1, 1, 1]], {translate: [0, 0], scale: 256}));
-  test.deepEqual(d3.tile().scale(512).translate([256, 256]).extent([[0, 256], [256, 512]])(), Object.assign([[0, 1, 1]], {translate: [0, 0], scale: 256}));
+  test.deepEqual(d3.tile().extent([[256, 256], [512, 512]])({k: 512, x: 256, y: 256}), Object.assign([[1, 1, 1]], {translate: [0, 0], scale: 256}));
+  test.deepEqual(d3.tile().extent([[0, 256], [256, 512]])({k: 512, x: 256, y: 256}), Object.assign([[0, 1, 1]], {translate: [0, 0], scale: 256}));
 });
 
 tape("tile.extent(…) coerces the input to numbers", test => {
@@ -57,9 +57,9 @@ tape("tile.extent(…) coerces the input to numbers", test => {
   test.strictEqual(tile.extent()[1][1], 500);
 });
 
-tape("tile.scale(…) sets the scale", test => {
-  const tile = d3.tile().scale(1000);
-  test.deepEqual(tile.scale(), 1000);
+tape("tile.scale(…) sets the scale function", test => {
+  test.deepEqual(d3.tile().scale(42).scale()(), 42);
+  test.deepEqual(d3.tile().scale(t => t.scale).scale()({scale: 42}), 42);
 });
 
 tape("tile(…) observes the scale", test => {
@@ -68,13 +68,12 @@ tape("tile(…) observes the scale", test => {
 });
 
 tape("tile.scale(…) coerces the input to numbers", test => {
-  const tile = d3.tile().scale(" 200 ");
-  test.strictEqual(tile.scale(), 200);
+  test.deepEqual(d3.tile().scale(" 512 ").translate([256, 256]).size([512, 512])(), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [0, 0], scale: 256}));
 });
 
 tape("tile.scale(…) can be less than the tile size", test => {
-  const tile = d3.tile().scale(128);
-  test.deepEqual(tile(), Object.assign([
+  const tile = d3.tile();
+  test.deepEqual(tile({k: 128, x: 480, y: 250}), Object.assign([
     [0,  0, 0]
   ], {
     translate: [3.25, 1.453125],
@@ -82,20 +81,18 @@ tape("tile.scale(…) can be less than the tile size", test => {
   }));
 });
 
-tape("tile.translate(…) sets the translate", test => {
-  const tile = d3.tile().translate([100, 200]);
-  test.deepEqual(tile.translate(), [100, 200]);
+tape("tile.translate(…) sets the translate function", test => {
+  test.deepEqual(d3.tile().translate([100, 200]).translate()(), [100, 200]);
+  test.deepEqual(d3.tile().translate(t => t.translate).translate()({translate: [100, 200]}), [100, 200]);
 });
 
 tape("tile(…) observes the translate", test => {
-  test.deepEqual(d3.tile().scale(512).translate([256, 256]).size([512, 512])(), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [0, 0], scale: 256}));
-  test.deepEqual(d3.tile().scale(512).translate([0, 0]).size([512, 512])(), Object.assign([[1, 1, 1]], {translate: [-1, -1], scale: 256}));
+  test.deepEqual(d3.tile().size([512, 512])({k: 512, x: 256, y: 256}), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [0, 0], scale: 256}));
+  test.deepEqual(d3.tile().size([512, 512])({k: 512, x: 0, y: 0}), Object.assign([[1, 1, 1]], {translate: [-1, -1], scale: 256}));
 });
 
 tape("tile.translate(…) coerces the input to numbers", test => {
-  const tile = d3.tile().translate([" 200 ", " 400 "]);
-  test.strictEqual(tile.translate()[0], 200);
-  test.strictEqual(tile.translate()[1], 400);
+  test.deepEqual(d3.tile().size([512, 512])({k: 512, x: " 256 ", y: " 256 "}), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [0, 0], scale: 256}));
 });
 
 tape("tile.zoomDelta(…) sets the zoom offset", test => {
@@ -131,7 +128,7 @@ tape("tile(…) observes the tile size", test => {
 tape("tile.clampX(…) sets the x-clampt", test => {
   const tile = d3.tile().clampX(false);
   test.deepEqual(tile.clampX(), false);
-  test.deepEqual(tile(), Object.assign([
+  test.deepEqual(tile({k: 256, x: 480, y: 250}), Object.assign([
     [-2,  0, 0], [-1,  0, 0], [0,  0, 0], [+1,  0, 0], [+2,  0, 0],
   ], {
     translate: [1.375, 0.4765625],
@@ -146,7 +143,7 @@ tape("tile(…) observes the x-clamp", test => {
 tape("tile.clampY(…) sets the y-clampt", test => {
   const tile = d3.tile().clampY(false);
   test.deepEqual(tile.clampY(), false);
-  test.deepEqual(tile(), Object.assign([
+  test.deepEqual(tile({k: 256, x: 480, y: 250}), Object.assign([
     [0, -1, 0],
     [0,  0, 0],
     [0, +1, 0]
@@ -164,7 +161,7 @@ tape("tile.clamp(…) disables both clamps", test => {
   const tile = d3.tile().clamp(false);
   test.deepEqual(tile.clampX(), false);
   test.deepEqual(tile.clampY(), false);
-  test.deepEqual(tile(), Object.assign([
+  test.deepEqual(tile({k: 256, x: 480, y: 250}), Object.assign([
     [-2, -1, 0], [-1, -1, 0], [0, -1, 0], [+1, -1, 0], [+2, -1, 0],
     [-2,  0, 0], [-1,  0, 0], [0,  0, 0], [+1,  0, 0], [+2,  0, 0],
     [-2, +1, 0], [-1, +1, 0], [0, +1, 0], [+1, +1, 0], [+2, +1, 0]
