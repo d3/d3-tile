@@ -38,7 +38,7 @@ function position(tile, tiles) {
   const {translate: [tx, ty], scale: k} = tiles;
   return [(x + tx) * k, (y + ty) * k];
 }
-````
+```
 
 For example:
 
@@ -113,7 +113,7 @@ If *translate* is not specified, returns the current layout translate function, 
 function translate(transform) {
   return [transform.x, transform.y];
 }
-````
+```
 
 This default is compatible with a [d3-zoom transform](https://github.com/d3/d3-zoom/blob/master/README.md#zoom-transforms).
 
@@ -164,4 +164,4 @@ Given *tile* coordinates [*x*, *y*, *z*], where *x* and *y* may be outside the â
 ```js
 d3.tileWrap([-1, 0, 1]) // [1, 0, 1]
 d3.tileWrap([-1, 0, 2]) // [3, 0, 2]
-````
+```
