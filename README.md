@@ -2,6 +2,8 @@
 
 Quadtree tiles are common for representing large, multi-resolution geometry and images, as in “slippy” maps. d3.tile provides a convenient mechanism for computing which tile coordinates should be visible in the current viewport. Unlike dedicated libraries for slippy maps, such as [Leaflet](https://leafletjs.com/), d3.tile’s tiny, low-level API is agnostic about how the tiles are presented and offers greater flexibility. d3.tile works well with [d3-geo](https://github.com/d3/d3-geo) for geographic maps and [d3-zoom](https://github.com/d3/d3-zoom) for interaction.
 
+For examples, see the [d3-tile collection](https://observablehq.com/collection/@d3/d3-tile) on Observable.
+
 ## Installing
 
 If you use NPM, `npm install d3-tile`. Otherwise, download the [latest release](https://github.com/d3/d3-tile/releases/latest). You can also load directly as a [standalone library](https://cdn.jsdelivr.net/npm/d3-tile). ES modules, AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
