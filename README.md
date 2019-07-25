@@ -28,7 +28,7 @@ const tile = d3.tile();
 
 <a href="#_tile" name="_tile">#</a> <i>tile</i>([…*arguments*]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/@d3/raster-tiles)
 
-Computes the set of tiles to display given the current settings, computing the [scale](#tile_scale) and [translate](#tile_translate) by invoking the corresponding accessors with the given *arguments*. Returns an array of [*x*, *y*, *z*] arrays representing the *x*- (horizontal), *y*- (vertical) and *z*-coordinates (zoom) of the visible tiles. The returned array also has array.*scale* and array.*translate* properties which together with a tile’s *x* and *y* determine the location of the tile in the viewport. See [Raster Tiles](https://observablehq.com/@d3/raster-tiles) for an example.
+Computes the set of tiles to display given the current settings, computing the [scale](#tile_scale) and [translate](#tile_translate) by invoking the corresponding accessors with the given *arguments*. Returns an array of [*x*, *y*, *z*] arrays representing the *x*- (horizontal), *y*- (vertical) and *z*- (zoom) coordinates of the visible tiles. The returned tiles array also has tiles.*scale* and tiles.*translate* properties which together with an individual tile’s *x* and *y* determine the intended location of the tile in the viewport. See [Raster Tiles](https://observablehq.com/@d3/raster-tiles) for an example.
 
 <a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
