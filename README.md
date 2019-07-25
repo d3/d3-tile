@@ -148,3 +148,11 @@ If *wrap* is *false*, wrapping logic will be disabled, limiting tiles to be with
 <a href="#tile_tileSize" name="tile_tileSize">#</a> <i>tile</i>.<b>tileSize</b>([<i>tileSize</i>])
 
 If *tileSize* is specified, sets this tile layout’s individual tile widths and heights to the specified number *tileSize* and returns this tile layout. If *tileSize* is not specified, returns the current layout tile size, which defaults to 256, the most common tile size among tile service providers.
+
+<a href="#tile_zoomDelta" name="tile_zoomDelta">#</a> <i>tile</i>.<b>zoomDelta</b>([<i>zoomDelta</i>])
+
+If *zoomDelta* is specified, sets this tile layout’s zoom multiplier factor *zoomDelta* and returns this tile layout. If *zoomDelta* is not specified, returns the current zoom multiplier factor, which defaults to 1.
+
+![image](https://user-images.githubusercontent.com/68416/61864415-03761d80-aeef-11e9-8c03-b772df649f72.png)
+
+You can use *zoomDelta* for showing tiles at different resolution than the screen. For example, if you have a HiDPI screen, you might take 256×256 tiles and display them in a 128×128 space by using `.zoomDelta(2)`.
