@@ -1,47 +1,35 @@
-import {range} from "d3-array";
+import {tileFilterXY, tileFilterNone} from "./filter.js";
 
 export default function() {
-  var x0 = 0,
-      y0 = 0,
-      x1 = 960,
-      y1 = 500,
-      tx = (x0 + x1) / 2,
-      ty = (y0 + y1) / 2,
-      tileSize = 256,
-      scale = 256,
-      zoomDelta = 0,
-      wrap = true;
+  let x0 = 0;
+  let y0 = 0;
+  let x1 = 960;
+  let y1 = 500;
+  let tx = (x0 + x1) / 2;
+  let ty = (y0 + y1) / 2;
+  let tileSize = 256;
+  let scale = 256;
+  let zoomDelta = 0;
+  let filter = tileFilterXY;
 
   function tile() {
-    var log2tileSize = Math.log(tileSize) / Math.log(2),
-        z = Math.max(Math.log(scale) / Math.LN2 - log2tileSize, 0),
-        z0 = Math.round(z + zoomDelta),
-        j = 1 << z0,
-        k = Math.pow(2, z - z0 + log2tileSize),
-        x = tx - scale / 2,
-        y = ty - scale / 2,
-        tiles = [],
-        cols = range(
-          Math.max(wrap ? -Infinity : 0, Math.floor((x0 - x) / k)),
-          Math.min(Math.ceil((x1 - x) / k), wrap ? Infinity : j)
-        ),
-        rows = range(
-          Math.max(0, Math.floor((y0 - y) / k)),
-          Math.min(Math.ceil((y1 - y) / k), j)
-        );
-
-    rows.forEach(function(y) {
-      cols.forEach(function(x) {
-        tiles.push({
-          x: (x % j + j) % j,
-          y: y,
-          z: z0,
-          tx: x * tileSize,
-          ty: y * tileSize
-        });
-      });
-    });
-
+    const z = Math.max(Math.log2(scale / tileSize), 0);
+    const z0 = Math.round(z + zoomDelta);
+    const k = Math.pow(2, z - z0) * tileSize;
+    const x = tx - scale / 2;
+    const y = ty - scale / 2;
+    const xmin = Math.floor((x0 - x) / k);
+    const xmax = Math.ceil((x1 - x) / k);
+    const ymin = Math.floor((y0 - y) / k);
+    const ymax = Math.ceil((y1 - y) / k);
+    const tiles = [];
+    for (let y = ymin; y < ymax; ++y) {
+      for (let x = xmin; x < xmax; ++x) {
+        if (filter(x, y, z0)) {
+          tiles.push([x, y, z0]);
+        }
+      }
+    }
     tiles.translate = [x / k, y / k];
     tiles.scale = k;
     return tiles;
@@ -67,12 +55,12 @@ export default function() {
     return arguments.length ? (zoomDelta = +_, tile) : zoomDelta;
   };
 
-  tile.wrap = function(_) {
-    return arguments.length ? (wrap = _, tile) : wrap;
+  tile.tileSize = function(_) {
+    return arguments.length ? (tileSize = +_, tile) : tileSize;
   };
 
-  tile.tileSize = function(_) {
-    return arguments.length ? (tileSize = _, tile) : tileSize;
+  tile.filter = function(_) {
+    return arguments.length ? (filter = _ == null ? tileFilterNone : filter, tile) : filter === tileFilterNone ? null : filter;
   };
 
   return tile;

@@ -1,107 +1,100 @@
 import tape from "tape-await";
-import {tile as Tile} from "../src/index.js";
+import * as d3 from "../src/index.js";
 
-function tile(x, y, z, tx, ty) {
-  return {
-    x: x,
-    y: y,
-    z: z,
-    tx: tx,
-    ty: ty
-  };
-}
-
-tape("tile", test => {
-  var width = 960,
-      height = 500,
-      tileLayout = Tile()
-        .size([width, height])
-        .scale(4096)
-        .translate([1617, 747]),
-      tiles = tileLayout();
-
-  test.deepEqual(tileLayout.size(), [width, height]);
-  test.equal(tileLayout.scale(), 4096);
-  test.deepEqual(tileLayout.translate(), [1617, 747]);
-
-  test.equal(tiles.scale, 256);
-  test.equal(tiles.translate[0], -1.68359375);
-  test.equal(tiles.translate[1], -5.08203125);
-  test.equal(tiles.length, 15);
-
-  test.deepEqual(tiles[0],  tile(1, 5, 4, 1 * 256, 5 * 256));
-  test.deepEqual(tiles[1],  tile(2, 5, 4, 2 * 256, 5 * 256));
-  test.deepEqual(tiles[2],  tile(3, 5, 4, 3 * 256, 5 * 256));
-  test.deepEqual(tiles[3],  tile(4, 5, 4, 4 * 256, 5 * 256));
-  test.deepEqual(tiles[4],  tile(5, 5, 4, 5 * 256, 5 * 256));
-  test.deepEqual(tiles[5],  tile(1, 6, 4, 1 * 256, 6 * 256));
-  test.deepEqual(tiles[6],  tile(2, 6, 4, 2 * 256, 6 * 256));
-  test.deepEqual(tiles[7],  tile(3, 6, 4, 3 * 256, 6 * 256));
-  test.deepEqual(tiles[8],  tile(4, 6, 4, 4 * 256, 6 * 256));
-  test.deepEqual(tiles[9],  tile(5, 6, 4, 5 * 256, 6 * 256));
-  test.deepEqual(tiles[10], tile(1, 7, 4, 1 * 256, 7 * 256));
-  test.deepEqual(tiles[11], tile(2, 7, 4, 2 * 256, 7 * 256));
-  test.deepEqual(tiles[12], tile(3, 7, 4, 3 * 256, 7 * 256));
-  test.deepEqual(tiles[13], tile(4, 7, 4, 4 * 256, 7 * 256));
-  test.deepEqual(tiles[14], tile(5, 7, 4, 5 * 256, 7 * 256));
+tape("d3.tile() has the expected defaults", test => {
+  const tile = d3.tile();
+  test.deepEqual(tile.size(), [960, 500]);
+  test.deepEqual(tile.extent(), [[0, 0], [960, 500]]);
+  test.deepEqual(tile.scale(), 256);
+  test.deepEqual(tile.translate(), [480, 250]);
+  test.deepEqual(tile.zoomDelta(), 0);
+  test.deepEqual(tile.tileSize(), 256);
+  test.deepEqual(tile.filter(), d3.tileFilterXY);
+  test.deepEqual(tile(), Object.assign([
+    [0,  0, 0]
+  ], {
+    translate: [1.375, 0.4765625],
+    scale: 256
+  }));
 });
 
-tape("size and extent", test => {
-  var tileLayout = Tile();
-  test.deepEqual(tileLayout.size(), [960, 500]);
-  test.deepEqual(tileLayout.extent(), [[0, 0], [960, 500]]);
-
-  tileLayout.size([200, 300]);
-  test.deepEqual(tileLayout.size(), [200, 300]);
-  test.deepEqual(tileLayout.extent(), [[0, 0], [200, 300]]);
-
-  tileLayout.extent([[100, 200], [300, 350]]);
-  test.deepEqual(tileLayout.size(), [200, 150]);
-  test.deepEqual(tileLayout.extent(), [[100, 200], [300, 350]]);
+tape("tile.size(…) sets the viewport", test => {
+  const tile = d3.tile().extent([[100, 200], [300, 500]]).size([200, 400]);
+  test.deepEqual(tile.size(), [200, 400]);
+  test.deepEqual(tile.extent(), [[0, 0], [200, 400]]);
 });
 
-tape("wrap", test => {
-  var tileLayout = Tile()
-        .scale(1 << 8)
-        .translate([480, 250]),
-      tiles = tileLayout();
+tape("tile.size(…) coerces the input to numbers", test => {
+  const tile = d3.tile().size([" 200 ", " 400 "]);
+  test.strictEqual(tile.size()[0], 200);
+  test.strictEqual(tile.size()[1], 400);
+});
 
-  test.equal(tileLayout.wrap(), true);
-  test.equal(tileLayout().length, 5);
+tape("tile.extent(…) sets the viewport", test => {
+  const tile = d3.tile().size([200, 400]).extent([[100, 200], [300, 500]]);
+  test.deepEqual(tile.size(), [200, 300]);
+  test.deepEqual(tile.extent(), [[100, 200], [300, 500]]);
+});
 
-  test.deepEqual(tiles[0], tile(0, 0, 0, -2 * 256, 0));
-  test.deepEqual(tiles[1], tile(0, 0, 0, -1 * 256, 0));
-  test.deepEqual(tiles[2], tile(0, 0, 0, 0 * 256, 0));
-  test.deepEqual(tiles[3], tile(0, 0, 0, 1 * 256, 0));
-  test.deepEqual(tiles[4], tile(0, 0, 0, 2 * 256, 0));
+tape("tile.extent(…) coerces the input to numbers", test => {
+  const tile = d3.tile().extent([[" 100 ", " 200 "], [" 300 ", " 500 "]]);
+  test.strictEqual(tile.extent()[0][0], 100);
+  test.strictEqual(tile.extent()[0][1], 200);
+  test.strictEqual(tile.extent()[1][0], 300);
+  test.strictEqual(tile.extent()[1][1], 500);
+});
+
+tape("tile.scale(…) sets the scale", test => {
+  const tile = d3.tile().scale(1000);
+  test.deepEqual(tile.scale(), 1000);
+});
+
+tape("tile.scale(…) coerces the input to numbers", test => {
+  const tile = d3.tile().scale(" 200 ");
+  test.strictEqual(tile.scale(), 200);
+});
+
+tape("tile.translate(…) sets the translate", test => {
+  const tile = d3.tile().translate([100, 200]);
+  test.deepEqual(tile.translate(), [100, 200]);
+});
+
+tape("tile.translate(…) coerces the input to numbers", test => {
+  const tile = d3.tile().translate([" 200 ", " 400 "]);
+  test.strictEqual(tile.translate()[0], 200);
+  test.strictEqual(tile.translate()[1], 400);
+});
+
+tape("tile.zoomDelta(…) sets the zoom offset", test => {
+  const tile = d3.tile().zoomDelta(1);
+  test.deepEqual(tile.zoomDelta(), 1);
+});
+
+tape("tile.zoomDelta(…) coerces the input to numbers", test => {
+  const tile = d3.tile().zoomDelta(" 2 ");
+  test.strictEqual(tile.zoomDelta(), 2);
+});
+
+tape("tile.tileSize(…) sets the tile size", test => {
+  const tile = d3.tile().tileSize(1000);
+  test.deepEqual(tile.tileSize(), 1000);
+});
+
+tape("tile.tileSize(…) coerces the input to numbers", test => {
+  const tile = d3.tile().tileSize(" 512 ");
+  test.strictEqual(tile.tileSize(), 512);
 
 });
 
-tape("tileSize", test => {
-  var tileLayout256 = Tile()
-        .scale(1 << 8)
-        .translate([480, 250]),
-      tiles256 = tileLayout256();
-
-  test.equal(tileLayout256.tileSize(), 256);
-  test.equal(tiles256.length, 5);
-
-  test.deepEqual(tiles256[0], tile(0, 0, 0, -2 * 256, 0));
-  test.deepEqual(tiles256[1], tile(0, 0, 0, -1 * 256, 0));
-  test.deepEqual(tiles256[2], tile(0, 0, 0, 0 * 256, 0));
-  test.deepEqual(tiles256[3], tile(0, 0, 0, 1 * 256, 0));
-  test.deepEqual(tiles256[4], tile(0, 0, 0, 2 * 256, 0));
-
-  var tileLayout512 = Tile()
-        .tileSize(512)
-        .scale(1 << 8)
-        .translate([480, 250]),
-      tiles512 = tileLayout512();
-
-  test.equal(tileLayout512.tileSize(), 512);
-  test.equal(tiles512.length, 3);
-
-  test.deepEqual(tiles512[0], tile(0, 0, 0, -1 * 512, 0));
-  test.deepEqual(tiles512[1], tile(0, 0, 0, 0 * 512, 0));
-  test.deepEqual(tiles512[2], tile(0, 0, 0, 1 * 512, 0));
+tape("tile.filter(…) sets the tile filter", test => {
+  const tile = d3.tile().filter(null);
+  test.deepEqual(tile.filter(), null);
+  test.deepEqual(tile(), Object.assign([
+    [-2, -1, 0], [-1, -1, 0], [0, -1, 0], [+1, -1, 0], [+2, -1, 0],
+    [-2,  0, 0], [-1,  0, 0], [0,  0, 0], [+1,  0, 0], [+2,  0, 0],
+    [-2, +1, 0], [-1, +1, 0], [0, +1, 0], [+1, +1, 0], [+2, +1, 0]
+  ], {
+    translate: [1.375, 0.4765625],
+    scale: 256
+  }));
 });
