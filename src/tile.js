@@ -17,11 +17,10 @@ export default function() {
     const k = Math.pow(2, z - z0) * tileSize;
     const x = tx - scale / 2;
     const y = ty - scale / 2;
-    const j = 1 << z0;
     const xmin = Math.max(clampX ? 0 : -Infinity, Math.floor((x0 - x) / k));
-    const xmax = Math.min(clampX ? j : Infinity, Math.ceil((x1 - x) / k));
+    const xmax = Math.min(clampX ? 1 << z0 : Infinity, Math.ceil((x1 - x) / k));
     const ymin = Math.max(clampY ? 0 : -Infinity, Math.floor((y0 - y) / k));
-    const ymax = Math.min(clampY ? j : Infinity, Math.ceil((y1 - y) / k));
+    const ymax = Math.min(clampY ? 1 << z0 : Infinity, Math.ceil((y1 - y) / k));
     const tiles = [];
     for (let y = ymin; y < ymax; ++y) {
       for (let x = xmin; x < xmax; ++x) {
