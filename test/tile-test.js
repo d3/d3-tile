@@ -23,6 +23,13 @@ tape("tile.size(…) sets the viewport", test => {
   const tile = d3.tile().extent([[100, 200], [300, 500]]).size([200, 400]);
   test.deepEqual(tile.size(), [200, 400]);
   test.deepEqual(tile.extent(), [[0, 0], [200, 400]]);
+  test.strictEqual(tile.size([256, 256]), tile);
+  test.deepEqual(tile.size(), [256, 256]);
+});
+
+tape("tile(…) observes the size", test => {
+  test.deepEqual(d3.tile().scale(256).translate([128, 128]).size([256, 256])(), Object.assign([[0, 0, 0]], {translate: [0, 0], scale: 256}));
+  test.deepEqual(d3.tile().scale(512).translate([128, 128]).size([256, 256])(), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [-0.5, -0.5], scale: 256}));
 });
 
 tape("tile.size(…) coerces the input to numbers", test => {
@@ -37,6 +44,11 @@ tape("tile.extent(…) sets the viewport", test => {
   test.deepEqual(tile.extent(), [[100, 200], [300, 500]]);
 });
 
+tape("tile(…) observes the extent", test => {
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).extent([[256, 256], [512, 512]])(), Object.assign([[1, 1, 1]], {translate: [0, 0], scale: 256}));
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).extent([[0, 256], [256, 512]])(), Object.assign([[0, 1, 1]], {translate: [0, 0], scale: 256}));
+});
+
 tape("tile.extent(…) coerces the input to numbers", test => {
   const tile = d3.tile().extent([[" 100 ", " 200 "], [" 300 ", " 500 "]]);
   test.strictEqual(tile.extent()[0][0], 100);
@@ -48,6 +60,11 @@ tape("tile.extent(…) coerces the input to numbers", test => {
 tape("tile.scale(…) sets the scale", test => {
   const tile = d3.tile().scale(1000);
   test.deepEqual(tile.scale(), 1000);
+});
+
+tape("tile(…) observes the scale", test => {
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).size([512, 512])(), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [0, 0], scale: 256}));
+  test.deepEqual(d3.tile().scale(256).translate([256, 256]).size([512, 512])(), Object.assign([[0, 0, 0]], {translate: [0.5, 0.5], scale: 256}));
 });
 
 tape("tile.scale(…) coerces the input to numbers", test => {
@@ -70,6 +87,11 @@ tape("tile.translate(…) sets the translate", test => {
   test.deepEqual(tile.translate(), [100, 200]);
 });
 
+tape("tile(…) observes the translate", test => {
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).size([512, 512])(), Object.assign([[0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]], {translate: [0, 0], scale: 256}));
+  test.deepEqual(d3.tile().scale(512).translate([0, 0]).size([512, 512])(), Object.assign([[1, 1, 1]], {translate: [-1, -1], scale: 256}));
+});
+
 tape("tile.translate(…) coerces the input to numbers", test => {
   const tile = d3.tile().translate([" 200 ", " 400 "]);
   test.strictEqual(tile.translate()[0], 200);
@@ -86,6 +108,11 @@ tape("tile.zoomDelta(…) coerces the input to numbers", test => {
   test.strictEqual(tile.zoomDelta(), 2);
 });
 
+tape("tile(…) observes the zoom delta", test => {
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).size([256, 256]).zoomDelta(-1)(), Object.assign([[0, 0, 0]], {translate: [0, 0], scale: 512}));
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).size([256, 256]).zoomDelta(1)(), Object.assign([[0, 0, 2], [1, 0, 2], [0, 1, 2], [1, 1, 2]], {translate: [0, 0], scale: 128}));
+});
+
 tape("tile.tileSize(…) sets the tile size", test => {
   const tile = d3.tile().tileSize(1000);
   test.deepEqual(tile.tileSize(), 1000);
@@ -94,6 +121,11 @@ tape("tile.tileSize(…) sets the tile size", test => {
 tape("tile.tileSize(…) coerces the input to numbers", test => {
   const tile = d3.tile().tileSize(" 512 ");
   test.strictEqual(tile.tileSize(), 512);
+});
+
+tape("tile(…) observes the tile size", test => {
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).size([256, 256]).tileSize(512)(), Object.assign([[0, 0, 0]], {translate: [0, 0], scale: 512}));
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).size([256, 256]).tileSize(128)(), Object.assign([[0, 0, 2], [1, 0, 2], [0, 1, 2], [1, 1, 2]], {translate: [0, 0], scale: 128}));
 });
 
 tape("tile.clampX(…) sets the x-clampt", test => {
@@ -105,6 +137,10 @@ tape("tile.clampX(…) sets the x-clampt", test => {
     translate: [1.375, 0.4765625],
     scale: 256
   }));
+});
+
+tape("tile(…) observes the x-clamp", test => {
+  test.deepEqual(d3.tile().scale(256).translate([0, 0]).size([256, 256]).clampX(false)(), Object.assign([[0, 0, 0], [1, 0, 0]], {translate: [-0.5, -0.5], scale: 256}));
 });
 
 tape("tile.clampY(…) sets the y-clampt", test => {
@@ -120,6 +156,10 @@ tape("tile.clampY(…) sets the y-clampt", test => {
   }));
 });
 
+tape("tile(…) observes the y-clamp", test => {
+  test.deepEqual(d3.tile().scale(256).translate([0, 0]).size([256, 256]).clampY(false)(), Object.assign([[0, 0, 0], [0, 1, 0]], {translate: [-0.5, -0.5], scale: 256}));
+});
+
 tape("tile.clamp(…) disables both clamps", test => {
   const tile = d3.tile().clamp(false);
   test.deepEqual(tile.clampX(), false);
@@ -132,4 +172,8 @@ tape("tile.clamp(…) disables both clamps", test => {
     translate: [1.375, 0.4765625],
     scale: 256
   }));
+});
+
+tape("tile(…) observes the clamp", test => {
+  test.deepEqual(d3.tile().scale(256).translate([0, 0]).size([256, 256]).clamp(false)(), Object.assign([[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]], {translate: [-0.5, -0.5], scale: 256}));
 });
