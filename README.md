@@ -132,7 +132,7 @@ If *clamp* is specified, sets [*tile*.clampX](#tile_clampX) and [*tile*.clampY](
 const tile = d3.tile().clamp(false);
 ```
 
-<a href="#tile_tileSize" name="tile_tileSize">#</a> <i>tile</i>.<b>tileSize</b>([<i>tileSize</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
+<a href="#tile_tileSize" name="tile_tileSize">#</a> <i>tile</i>.<b>tileSize</b>([<i>tileSize</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/@d3/tile-tilesize)
 
 If *tileSize* is specified, sets this tile layout’s tile width and height to the specified number *tileSize* and returns this tile layout. If *tileSize* is not specified, returns the current layout tile size, which defaults to 256. 256×256 is the most common tile size among tile providers.
 
