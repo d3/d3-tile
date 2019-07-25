@@ -1,6 +1,6 @@
 # d3-tile
 
-Quadtree tiles are common for representing large, multi-resolution geometry and images, as in “slippy” maps. d3.tile provides a convenient mechanism for computing which tile coordinates should be visible in the current viewport. Unlike dedicated libraries for slippy maps, such as [Leaflet](https://leafletjs.com/), d3.tile’s tiny, low-level API is agnostic about how the tiles are presented and offers greater flexibility. d3.tile works well with [d3-geo](https://github.com/d3/d3-geo) for geographic maps and [d3-zoom](https://github.com/d3/d3-zoom) for interaction.
+Quadtree tiles are common for representing large, multi-resolution geometry and images, as in “slippy” maps. d3.tile provides a convenient mechanism for computing which tile coordinates should be visible in the given viewport. Unlike dedicated libraries for slippy maps, such as [Leaflet](https://leafletjs.com/), d3.tile’s tiny, low-level API is agnostic about how the tiles are presented and offers greater flexibility. d3.tile works well with [d3-geo](https://github.com/d3/d3-geo) for geographic maps and [d3-zoom](https://github.com/d3/d3-zoom) for interaction.
 
 For examples, see the [d3-tile collection](https://observablehq.com/collection/@d3/d3-tile) on Observable.
 
@@ -30,13 +30,22 @@ const tile = d3.tile();
 
 <a href="#_tile" name="_tile">#</a> <i>tile</i>(…*arguments*) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/@d3/raster-tiles)
 
-Computes the set of tiles to display given the current settings, computing the [scale](#tile_scale) and [translate](#tile_translate) by invoking the corresponding accessors with the given *arguments*. Returns an array of [*x*, *y*, *z*] arrays representing the *x*- (horizontal), *y*- (vertical) and *z*- (zoom) coordinates of the visible tiles. The returned tiles array also has tiles.*scale* and tiles.*translate* properties which together with an individual tile’s *x* and *y* determine the intended location of the tile in the viewport.
+Computes the set of tiles to display given the current settings, computing the [scale](#tile_scale) and [translate](#tile_translate) by invoking the corresponding accessors with the given *arguments*. Returns an array of [*x*, *y*, *z*] arrays representing the *x*- (horizontal), *y*- (vertical) and *z*- (zoom) coordinates of any tiles which intersect the current viewport; these are the “visible” tiles. The returned tiles array also has tiles.*scale* and tiles.*translate* properties which together with an individual tile’s *x* and *y* determine the intended location of the tile in the viewport. The following function computes the pixel coordinates of the given tile in the viewport.
+
+```js
+function position(tile, tiles) {
+  const [x, y] = tile;
+  const {translate: [tx, ty], scale: k} = tiles;
+  return [(x + tx) * k, (y + ty) * k];
+}
+````
+
+For example:
 
 ```js
 const tiles = tile({k: 256, x: 480, y: 250});
-const {translate: [tx, ty], scale: k} = tiles;
-for (const [x, y, z] of tiles) {
-  console.log(`tile ${x}/${y}/${z} is at ${(x + tx) * k}, ${(y + ty) * k}`);
+for (const tile of tiles) {
+  console.log(`tile ${tile} is at ${position(tile, tiles)}`);
 }
 ```
 
