@@ -11,6 +11,7 @@ If you use NPM, `npm install d3-tile`. Otherwise, download the [latest release](
 <script>
 
 const tile = d3.tile();
+const tiles = tile({k: 256, x: 480, y: 250});
 
 </script>
 ```
