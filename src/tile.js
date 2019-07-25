@@ -12,8 +12,8 @@ export default function() {
   let clampY = true;
 
   function tile() {
-    const z = Math.max(Math.log2(scale / tileSize), 0);
-    const z0 = Math.round(z + zoomDelta);
+    const z = Math.log2(scale / tileSize);
+    const z0 = Math.round(Math.max(z + zoomDelta, 0));
     const k = Math.pow(2, z - z0) * tileSize;
     const x = tx - scale / 2;
     const y = ty - scale / 2;

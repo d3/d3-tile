@@ -55,6 +55,16 @@ tape("tile.scale(…) coerces the input to numbers", test => {
   test.strictEqual(tile.scale(), 200);
 });
 
+tape("tile.scale(…) can be less than the tile size", test => {
+  const tile = d3.tile().scale(128);
+  test.deepEqual(tile(), Object.assign([
+    [0,  0, 0]
+  ], {
+    translate: [3.25, 1.453125],
+    scale: 128
+  }));
+});
+
 tape("tile.translate(…) sets the translate", test => {
   const tile = d3.tile().translate([100, 200]);
   test.deepEqual(tile.translate(), [100, 200]);
