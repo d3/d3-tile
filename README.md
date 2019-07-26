@@ -56,19 +56,23 @@ See [Zoomable Tiles](https://observablehq.com/@d3/zoomable-tiles) for more infor
 
 <a href="#tile_extent" name="tile_extent">#</a> <i>tile</i>.<b>extent</b>([<i>extent</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-If *extent* is specified, sets this tile layout’s viewport extent to the specified array [[*x0*, *y0*], [*x1*, *y1*]], where [*x0*, *y0*] is the top-left corner and [*x1*, *y1*] is the bottom-right corner, and returns this tile layout. If *extent* is not specified, returns the current viewport extent, which defaults to [[0, 0], [960, 500]]. Setting the viewport extent implicitly sets the [viewport size](#tile_size).
+If *extent* is specified, sets this tile layout’s viewport extent to the specified array [[*x0*, *y0*], [*x1*, *y1*]], where [*x0*, *y0*] is the top-left corner and [*x1*, *y1*] is the bottom-right corner, and returns this tile layout. If *extent* is not specified, returns the current viewport extent, which defaults to [[0, 0], [960, 500]].
 
 ```js
 const tile = d3.tile().extent([[100, 200], [300, 400]]);
 ```
 
+Setting the viewport extent implicitly sets the [viewport size](#tile_size).
+
 <a href="#tile_size" name="tile_size">#</a> <i>tile</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-If *size* is specified, sets this tile layout’s viewport size to the specified array of numbers [*width*, *height*] and returns this tile layout. If *size* is not specified, returns the current viewport size, which defaults to [960, 500]. This is a convenience method for setting the [viewport extent](#tile_extent) to [[0, 0], [*width*, *height*]].
+If *size* is specified, sets this tile layout’s viewport size to the specified array of numbers [*width*, *height*] and returns this tile layout. If *size* is not specified, returns the current viewport size, which defaults to [960, 500].
 
 ```js
 const tile = d3.tile().size([200, 200]);
 ```
+
+This is a convenience method for setting the [viewport extent](#tile_extent) to [[0, 0], [*width*, *height*]].
 
 <a href="#tile_scale" name="tile_scale">#</a> <i>tile</i>.<b>scale</b>([<i>scale</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
