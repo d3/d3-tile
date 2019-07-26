@@ -126,19 +126,24 @@ This default is compatible with a [d3-zoom transform](https://github.com/d3/d3-z
 
 <a href="#tile_clampX" name="tile_clampX">#</a> <i>tile</i>.<b>clampX</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js), [Examples](https://observablehq.com/@d3/wrapped-tiles)
 
-If *clamp* is specified, sets whether or not the visible tiles will be clamped in the *x*-coordinate and returns this tile layout. If *clamp* is not specified, returns the current *x*-clamp, which defaults to true. If the *x*-clamp is false, then the tile layout will return tiles that are outside the “world” tile [0, 0, 0], with *x*-coordinates that are outside the normal bounds 0 ≤ *x* < 2^*z*. See [d3.tileWrap](#tileWrap) for converting these coordinates to wrapped in-world coordinates. See [Wrapped Tiles](https://observablehq.com/@d3/wrapped-tiles) for example.
+If *clamp* is specified, sets whether or not the visible tiles will be clamped in the *x*-dimension and returns this tile layout. If *clamp* is not specified, returns whether *x*-clamping is enabled, which defaults to true. If *x*-clamping is disabled, then the tile layout may return tiles that are outside the normal bounds 0 ≤ *x* < 2^*z* of the “world” tile [0, 0, 0].
 
 ```js
 const tile = d3.tile().clampX(false);
 ```
 
+ See [d3.tileWrap](#tileWrap) for converting these coordinates to wrapped in-world coordinates, and [Wrapped Tiles](https://observablehq.com/@d3/wrapped-tiles) for example.
+
 <a href="#tile_clampY" name="tile_clampY">#</a> <i>tile</i>.<b>clampY</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
-If *clamp* is specified, sets whether or not the visible tiles will be clamped in the *y*-coordinate and returns this tile layout. If *clamp* is not specified, returns the current *y*-clamp, which defaults to true. If the *y*-clamp is false, then the tile layout will return tiles that are outside the “world” tile [0, 0, 0], with *y*-coordinates that are outside the normal bounds 0 ≤ *y* < 2^*z*. See [d3.tileWrap](#tileWrap) for converting these coordinates to wrapped in-world coordinates. See also [*tile*.clampX](#tile_clampX).
+If *clamp* is specified, sets whether or not the visible tiles will be clamped in the *y*-dimension and returns this tile layout. If *clamp* is not specified, returns whether *y*-clamping is enabled, which defaults to true. If *y*-clamping is disabled, then the tile layout may return tiles that are outside the normal bounds 0 ≤ *y* < 2^*z* of the “world” tile [0, 0, 0].
 
 ```js
 const tile = d3.tile().clampY(false);
 ```
+
+ See [d3.tileWrap](#tileWrap) for converting these coordinates to wrapped in-world coordinates, and [Wrapped Tiles](https://observablehq.com/@d3/wrapped-tiles) for example. See also [*tile*.clampX](#tile_clampX).
+
 
 <a href="#tile_clamp" name="tile_clamp">#</a> <i>tile</i>.<b>clamp</b>([<i>clamp</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
 
