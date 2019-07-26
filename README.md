@@ -83,7 +83,7 @@ const tile = d3.tile().scale(t => t.scale).translate(t => t.translate);
 const tiles = tile({scale: 1024, translate: [100, 200]});
 ```
 
-If *scale* is not a function, it assumed to be a constant number, and is wrapped in a function which returns the specified number.
+If *scale* is not a function, it assumed to be a constant number, and is wrapped in a function.
 
 ```js
 const tile = d3.tile().scale(1024).translate([100, 200]);
@@ -108,7 +108,7 @@ const tile = d3.tile().scale(t => t.scale).translate(t => t.translate);
 const tiles = tile({scale: 1024, translate: [100, 200]});
 ```
 
-If *translate* is not a function, it is assumed to be a constant array [*x*, *y*] and is wrapped in a function which returns the specified array.
+If *translate* is not a function, it is assumed to be a constant array [*x*, *y*] and is wrapped in a function.
 
 ```js
 const tile = d3.tile().scale(1024).translate([100, 200]);
