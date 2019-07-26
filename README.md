@@ -32,7 +32,7 @@ const tile = d3.tile();
 
 Computes the set of tiles to display given the current settings, computing the [scale](#tile_scale) and [translate](#tile_translate) by invoking the corresponding accessors with the given *arguments*. Returns an array of [*x*, *y*, *z*] arrays representing the *x*- (horizontal), *y*- (vertical) and *z*- (zoom) integer coordinates of any tiles which intersect the current viewport; these are the “visible” tiles. The returned tiles array also has tiles.*scale* and tiles.*translate* properties which together with an individual tile’s *x* and *y* determine the intended location of the tile in the viewport.
 
-For example, the following function computes the pixel coordinates of the top-left corner of the given tile in the viewport.
+For example, the following function computes the pixel coordinates of the top-left corner of the given tile in the current viewport:
 
 ```js
 function position(tile, tiles) {
