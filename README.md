@@ -47,8 +47,8 @@ And in use:
 ```js
 const tile = d3.tile();
 const tiles = tile({k: 256, x: 480, y: 250});
-for (const tile of tiles) {
-  console.log(`tile ${tile} is at ${position(tile, tiles)}`);
+for (const t of tiles) {
+  console.log(`tile ${t} is at ${position(t, tiles)}`);
 }
 ```
 
