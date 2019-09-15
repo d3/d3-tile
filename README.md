@@ -169,6 +169,10 @@ If *zoomDelta* is specified, sets this tile layout’s zoom offset to the specif
 const tile = d3.tile().zoomDelta(2);
 ```
 
+<a href="#tile_maxNativeZoom" name="tile_maxNativeZoom">#</a> <i>tile</i>.<b>maxNativeZoom</b>([<i>maxNativeZoom</i>]) · [Source](https://github.com/d3/d3-tile/blob/master/src/tile.js)
+
+If *maxNativeZoom* is specified, sets this tile layouts maxNativeZoom to the specified number *maxNativeZoom* and returns this tile layout. If *maxNativeZoom* is not specified, returns the current maxNativeZoom, which defaults to `Infinity`. *maxNativeZoom* affects the max z-coordinate [tile](#_tile) will return. This is useful when your tile source only provides tiles to a certain z-coordinate (i.e. OpenStreetMap provides only tiles to z=19), but you still want to be able to use [d3-zoom](https://github.com/d3/d3-zoom) to zoom further. This function is inspired by [Leaflet's maxNativeZoom](https://leafletjs.com/reference-1.5.0.html#gridlayer-maxnativezoom)
+
 <a href="#tileWrap" name="tileWrap">#</a> d3.<b>tileWrap</b>(*tile*) · [Source](https://github.com/d3/d3-tile/blob/master/src/wrap.js), [Examples](https://observablehq.com/@d3/wrapped-tiles)
 
 Given *tile* coordinates [*x*, *y*, *z*], where *x* and *y* may be outside the “world” tile [0, 0, 0], returns the wrapped tile coordinates [*x′*, *y′*, *z*] where *j* = 2 ^ *z*, *x′* = *x* - ⌊*x* / *j*⌋ * *j* and *y′* = *y* - ⌊*y* / *j*⌋ * *j*. This function is most commonly used in conjunction with [*tile*.clampX](#tile_clampX) to allow horizontal wrapping of web Mercator tiles.

@@ -174,3 +174,7 @@ tape("tile.clamp(…) disables both clamps", test => {
 tape("tile(…) observes the clamp", test => {
   test.deepEqual(d3.tile().scale(256).translate([0, 0]).size([256, 256]).clamp(false)(), Object.assign([[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]], {translate: [-0.5, -0.5], scale: 256}));
 });
+
+tape("tile(…) observes the maxNativeZoom", test => {
+  test.deepEqual(d3.tile().scale(512).translate([256, 256]).size([512, 512]).maxNativeZoom(0)(), Object.assign([[0, 0, 0]], {translate: [0, 0], scale: 512}));
+});
