@@ -19,12 +19,13 @@ export default function() {
   let scale = defaultScale;
   let translate = defaultTranslate;
   let zoomDelta = 0;
+  let maxNativeZoom = Infinity;
 
   function tile() {
     const scale_ = +scale.apply(this, arguments);
     const translate_ = translate.apply(this, arguments);
     const z = Math.log2(scale_ / tileSize);
-    const z0 = Math.round(Math.max(z + zoomDelta, 0));
+    const z0 = Math.round(Math.min(Math.max(z + zoomDelta, 0), maxNativeZoom));
     const k = Math.pow(2, z - z0) * tileSize;
     const x = +translate_[0] - scale_ / 2;
     const y = +translate_[1] - scale_ / 2;
@@ -77,6 +78,10 @@ export default function() {
 
   tile.clampY = function(_) {
     return arguments.length ? (clampY = !!_, tile) : clampY;
+  };
+
+  tile.maxNativeZoom = function(_) {
+    return arguments.length ? (maxNativeZoom = +_, tile) : maxNativeZoom;
   };
 
   return tile;
