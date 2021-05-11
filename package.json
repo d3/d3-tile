@@ -15,13 +15,15 @@
   "main": "dist/d3-tile.js",
   "unpkg": "dist/d3-tile.min.js",
   "module": "src/index.js",
+  "types": "src/index.d.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/d3/d3-tile.git"
   },
   "files": [
     "dist/**/*.js",
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/index.d.ts"
   ],
   "scripts": {
     "test": "tape -r esm 'test/**/*-test.js' && eslint src",
